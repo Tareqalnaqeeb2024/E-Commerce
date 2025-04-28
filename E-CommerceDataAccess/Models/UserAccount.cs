@@ -9,5 +9,6 @@ namespace E_CommerceDataAccess.Models
 {
     public class UserAccount : IdentityUser
     {
+        public ICollection<Order> Orders { get; set; }
     }
 }
