@@ -1,0 +1,14 @@
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\bin\Debug\net8.0\E-CommerceDataAccess.deps.json
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\bin\Debug\net8.0\E-CommerceDataAccess.runtimeconfig.json
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\bin\Debug\net8.0\E-CommerceDataAccess.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\bin\Debug\net8.0\E-CommerceDataAccess.pdb
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.csproj.AssemblyReference.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.GeneratedMSBuildEditorConfig.editorconfig
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.AssemblyInfoInputs.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.AssemblyInfo.cs
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.csproj.CoreCompileInputs.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\refint\E-CommerceDataAccess.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.pdb
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.genruntimeconfig.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\ref\E-CommerceDataAccess.dll

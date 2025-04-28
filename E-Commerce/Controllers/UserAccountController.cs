@@ -1,0 +1,121 @@
+﻿using Azure.Identity;
+using E_Commerce.Basic;
+using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+
+namespace E_Commerce.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserAccountController : ControllerBase
+    {
+        public readonly UserManager<UserAccount> _userManager;
+        public readonly JwtSettings _jwtSettings;
+
+        public UserAccountController( UserManager<UserAccount> userManager, IOptions<JwtSettings> jwtSettings)
+        {
+            _userManager = userManager;
+            _jwtSettings = jwtSettings.Value;
+        }
+
+        [HttpPost("[action]")]
+
+        public async Task<IActionResult> CreateNewUser( UserDTO userDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                UserAccount userAccount = new()
+                {
+                    UserName = userDTO.UserName,
+                    Email = userDTO.Email,
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(userAccount, userDTO.Password);
+
+                if (result.Succeeded)
+                {
+                    return Ok("Added User Successfuly");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (ModelState.IsValid)
+            {
+                UserAccount? user = await  _userManager.FindByNameAsync(loginDTO.UserName);
+
+                if(user != null)
+                {
+                    if (await _userManager.CheckPasswordAsync(user, loginDTO.Password))
+                    {
+                        // First Get Claims
+
+                        var Claims = new List<Claim>();
+
+                        Claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+                        Claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                        Claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+
+                        var roles = await _userManager.GetRolesAsync(user);
+                        foreach (var role in roles)
+                        {
+                            Claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+                            
+                        }
+
+                        //second Get SigningCredentials
+
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
+                        var sc = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                        // third initial the token 
+
+                        var token = new JwtSecurityToken(
+                            claims: Claims,
+                            issuer: _jwtSettings.Issuer,
+                            audience: _jwtSettings.Audience,
+                            expires: DateTime.UtcNow.AddHours(1),
+                            signingCredentials: sc);
+
+                        var _token = new
+                        {
+                            token = new JwtSecurityTokenHandler().WriteToken(token),
+                            expiration = token.ValidTo
+                        };
+
+                        return Ok(_token);
+
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "UserName is Invalid");
+                }
+
+            }
+            return BadRequest(ModelState);
+        }
+    }
+}

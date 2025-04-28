@@ -1,0 +1,12 @@
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\bin\Debug\net8.0\E-CommerceDataBusiness.deps.json
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\bin\Debug\net8.0\E-CommerceDataBusiness.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\bin\Debug\net8.0\E-CommerceDataBusiness.pdb
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.GeneratedMSBuildEditorConfig.editorconfig
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.AssemblyInfoInputs.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.AssemblyInfo.cs
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.csproj.CoreCompileInputs.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\refint\E-CommerceDataBusiness.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.pdb
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\ref\E-CommerceDataBusiness.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.csproj.AssemblyReference.cache
