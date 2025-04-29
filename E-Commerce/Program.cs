@@ -1,5 +1,6 @@
 using E_Commerce.Basic;
 using E_Commerce.Extenstion;
+using E_Commerce.MappingProfile;
 using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.Models;
 using Microsoft.AspNetCore.Identity;
@@ -23,6 +24,9 @@ builder.Services.AddIdentity<UserAccount, IdentityRole>() // Specify your custom
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddCustomJwtAuth(builder.Configuration);
+
+//Auto Mapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
