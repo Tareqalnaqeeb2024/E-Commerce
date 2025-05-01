@@ -27,6 +27,15 @@ builder.Services.AddCustomJwtAuth(builder.Configuration);
 
 //Auto Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.AllowAnyOrigin() // Or .WithOrigins("https://yourfrontend.com")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,7 +46,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowFrontend");
 app.UseAuthorization();
 
 app.MapControllers();
