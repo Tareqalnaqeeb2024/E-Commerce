@@ -1,6 +1,14 @@
 {
   "Files": [
     {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\Products\\1e98e621-9c15-47b8-8fc9-0da5e4042e9f.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\1e98e621-9c15-47b8-8fc9-0da5e4042e9f.jpg"
+    },
+    {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\Products\\52261ad2-f055-4165-9d11-e148293c9d57.jpg",
+      "PackagePath": "staticwebassets\\images\\Products\\52261ad2-f055-4165-9d11-e148293c9d57.jpg"
+    },
+    {
       "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\Products\\6880b7aa-a096-40c9-9d49-b601eb51ef7e.jpg",
       "PackagePath": "staticwebassets\\images\\Products\\6880b7aa-a096-40c9-9d49-b601eb51ef7e.jpg"
     },

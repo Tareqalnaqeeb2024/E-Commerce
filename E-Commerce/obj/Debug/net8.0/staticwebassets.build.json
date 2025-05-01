@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "lcDqRa8eDeWUZGiD4uOJYAtdf4evmkT+TBSQDV6SFLY=",
+  "Hash": "TCn409Pmw25ar9FD0djaS3Ix7R9eDv1Us5Gn7Fmyay0=",
   "Source": "E-Commerce",
   "BasePath": "_content/E-Commerce",
   "Mode": "Default",
@@ -16,6 +16,44 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\Products\\1e98e621-9c15-47b8-8fc9-0da5e4042e9f.jpg",
+      "SourceId": "E-Commerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\",
+      "BasePath": "_content/E-Commerce",
+      "RelativePath": "images/Products/1e98e621-9c15-47b8-8fc9-0da5e4042e9f.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Products\\1e98e621-9c15-47b8-8fc9-0da5e4042e9f.jpg"
+    },
+    {
+      "Identity": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\Products\\52261ad2-f055-4165-9d11-e148293c9d57.jpg",
+      "SourceId": "E-Commerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\",
+      "BasePath": "_content/E-Commerce",
+      "RelativePath": "images/Products/52261ad2-f055-4165-9d11-e148293c9d57.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Products\\52261ad2-f055-4165-9d11-e148293c9d57.jpg"
+    },
     {
       "Identity": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\Products\\6880b7aa-a096-40c9-9d49-b601eb51ef7e.jpg",
       "SourceId": "E-Commerce",

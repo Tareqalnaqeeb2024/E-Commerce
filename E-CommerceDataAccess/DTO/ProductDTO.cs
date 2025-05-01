@@ -16,7 +16,8 @@ namespace E_CommerceDataAccess.DTO
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string ImageUrl { get; set; }
-      
+        public string? ImageBase64 { get; set; }
+
     }
     public class ProductCreateDTO
     {
