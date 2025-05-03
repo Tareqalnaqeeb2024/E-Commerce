@@ -19,14 +19,14 @@ namespace E_CommerceDataAccess.DTO
     public class OrderItemCreateDTO
     {
         public int ProductId { get; set; }
-        public int Quentity { get; set; }
+        public int Quantity { get; set; }
         public decimal Price { get; set; }
 
     }
     public class OrderItemUpdateDTO
     {
         public int ProductId { get; set; }
-        public int Quentity { get; set; }
+        public int Quantity { get; set; }
         public decimal Price { get; set; }
 
     }

@@ -4,6 +4,7 @@ using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Controllers
 {
@@ -18,6 +19,24 @@ namespace E_Commerce.Controllers
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
+        {
+
+            var Products = await _context.Products.ToListAsync();
+            if(Products == null)
+            {
+                return NotFound();
+            }
+            var ProductsDTO = _mapper.Map<List<ProductDTO>>(Products);
+
+            foreach (var product in ProductsDTO)
+            {
+                product.ImageUrl = Url.Action("DownLoadImage", new { fileName = product.ImageUrl});
+             }
+            return Ok(ProductsDTO);
         }
 
         [HttpGet("{Id}")]
@@ -121,6 +140,65 @@ namespace E_Commerce.Controllers
                 ".bmp" => "image/bmp",
                 _ => "application/octet-stream"
             };
+        }
+
+
+        [HttpPut("{Id}")]
+
+        public async Task<ActionResult> UpdateProduct(int Id,  ProductUpdateDTO updateDTO)
+        {
+            if (Id <= 0)
+            {
+                return BadRequest("Id must be positive");
+            }
+
+            var product = await _context.Products.FindAsync(Id);
+            if (product == null)
+            {
+                return NotFound($"No product with Id: {Id}");
+            }
+
+
+            _mapper.Map(updateDTO, product);
+            var uploadDirectory = @"E:\MyUploads";
+            if (!string.IsNullOrEmpty(product.ImageUrl))
+            {
+                var oldfilepath = Path.Combine(uploadDirectory, product.ImageUrl);
+                if (System.IO.File.Exists(oldfilepath))
+                {
+                    System.IO.File.Delete(oldfilepath);
+                }
+            }
+            var newfilepname = Guid.NewGuid() + Path.GetExtension(updateDTO.ImageFile.FileName);
+
+            var filepath = Path.Combine(uploadDirectory, newfilepname);
+
+            using (var stream = new FileStream(filepath, FileMode.Create))
+            {
+                await updateDTO.ImageFile.CopyToAsync(stream);
+
+            }
+            product.ImageUrl = newfilepname;
+
+            _context.Entry(product).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok("Update Product Successfuly");
+        }
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> DeleteProduct(int Id)
+        {
+
+            var product = await _context.Products.FindAsync(Id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return Ok("Delete SuccessFuly");
         }
 
 

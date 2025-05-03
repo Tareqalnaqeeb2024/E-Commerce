@@ -21,4 +21,10 @@ namespace E_CommerceDataAccess.DTO
         public string UserId { get; set; }
         public List<OrderItemCreateDTO> OrderItems { get; set; } = new List<OrderItemCreateDTO>();
     }
+    public class OrderUpdateDTO
+    {
+        //public string UserId { get; set; }
+        public string Status { get; set; }
+        public List<OrderItemCreateDTO> OrderItems { get; set; } = new List<OrderItemCreateDTO>();
+    }
 }

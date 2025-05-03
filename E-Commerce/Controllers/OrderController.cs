@@ -22,7 +22,7 @@ namespace E_Commerce.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrder()
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
         {
             var Orders = await _context.Orders
                   .Include(o => o.OrderItems)
@@ -60,7 +60,7 @@ namespace E_Commerce.Controllers
             order.Status = "Pending"; // Redundant if set in entity, but explicit
 
             // Calculate total
-            order.TotalAmount = orderCreate.OrderItems.Sum(oi => oi.Price * oi.Quentity);
+            order.TotalAmount = orderCreate.OrderItems.Sum(oi => oi.Price * oi.Quantity);
 
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
@@ -72,8 +72,67 @@ namespace E_Commerce.Controllers
 
 
             return CreatedAtAction("GetOrder", new { Id = order.OrderId }, _mapper.Map<OrderDTO>(createdOrder));
+ 
 
 
         }
+
+        [HttpPut("{Id}")]
+
+        public async Task<ActionResult> UpdateOrder(int Id , OrderUpdateDTO updateDTO)
+        {
+            if(Id <= 0)
+            {
+                return BadRequest("Id Must Be Positive");
+            }
+
+            var OldOrder = await _context.Orders
+                   .Include(o => o.OrderItems)
+                    .FirstOrDefaultAsync( o => o.OrderId == Id);
+
+
+            if(OldOrder == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(updateDTO, OldOrder);
+
+            
+                OldOrder.TotalAmount = OldOrder.OrderItems.Sum(o => o.Price * o.Quantity);
+
+                await _context.SaveChangesAsync();
+               
+            
+            return NoContent();
+
+
+
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> DeleteOrder(int Id)
+        {
+            if (Id <= 0)
+            {
+                return BadRequest(" ID Must be Positive");
+            }
+            var order = await _context.Orders.FindAsync(  Id);
+
+            if (order == null)
+            {
+                return NotFound();
+            
+            }
+
+            _context.Orders.Remove(order);
+
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Delete successfuly");
+
+        }
     }
+
 }

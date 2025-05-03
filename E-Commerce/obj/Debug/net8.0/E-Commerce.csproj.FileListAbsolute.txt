@@ -172,3 +172,4 @@ E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\zh-Hant\Microsoft.Code
 E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\AutoMapper.dll
 E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\E-Commerce.staticwebassets.runtime.json
+E:\BackEndProjects\E-Commerce\E-Commerce\obj\Debug\net8.0\E-Commerce.sourcelink.json

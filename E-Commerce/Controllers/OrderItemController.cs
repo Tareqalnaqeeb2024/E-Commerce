@@ -60,5 +60,71 @@ namespace E_Commerce.Controllers
 
             return CreatedAtAction("GetOrderItem", new { Id = createdItem.OrderItemId },  _mapper.Map<OrderItemDTO>(createdItem));
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderItemDTO>>> GetAllOrderItems()
+        {
+            var orderItems = await _context.Items.ToListAsync();
+
+            if (orderItems == null)
+            {
+                return NotFound();
+
+            }
+
+            return Ok(_mapper.Map<List<OrderItemDTO>>( orderItems));
+        }
+
+        [HttpPut("{Id}")]
+        public async Task<ActionResult> UpdateOrderItem(int Id, OrderItemUpdateDTO orderItemUpdate)
+        {
+            if (Id <= 0)
+            {
+                return BadRequest("Id must be positive");
+            }
+
+            var orderitem = await _context.Items.FindAsync(Id);
+
+            if (orderitem == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(orderItemUpdate, orderitem);
+
+            _context.Entry(orderitem).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok(" Update OrderItems Successfluy");
+        }
+
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteOrderItem(int Id)
+        {
+            if (Id <= 0)
+            {
+                return BadRequest("ID must be positive");
+            }
+
+            var orderItem = await _context.Items.FindAsync(Id);
+            if (orderItem == null)
+            {
+                return NotFound($"No order item found with ID: {Id}");
+            }
+
+            _context.Items.Remove(orderItem);
+            await _context.SaveChangesAsync();
+
+            return Ok("Deleted Orderitem Successfuly");
+        }
+
+
+
+        private bool OrderItemExists(int Id)
+        {
+            return _context.Items.Any(e => e.OrderItemId == Id);
+        }
+
     }
 }

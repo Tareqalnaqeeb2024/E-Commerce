@@ -12,3 +12,4 @@ E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\refint\E-Com
 E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.pdb
 E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.genruntimeconfig.cache
 E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\ref\E-CommerceDataAccess.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataAccess\obj\Debug\net8.0\E-CommerceDataAccess.sourcelink.json
