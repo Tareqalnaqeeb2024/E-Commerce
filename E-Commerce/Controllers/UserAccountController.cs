@@ -18,11 +18,13 @@ namespace E_Commerce.Controllers
     public class UserAccountController : ControllerBase
     {
         public readonly UserManager<UserAccount> _userManager;
+        public readonly RoleManager<IdentityRole> _roleManager;
         public readonly JwtSettings _jwtSettings;
 
-        public UserAccountController( UserManager<UserAccount> userManager, IOptions<JwtSettings> jwtSettings)
+        public UserAccountController( UserManager<UserAccount> userManager, IOptions<JwtSettings> jwtSettings , RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _jwtSettings = jwtSettings.Value;
         }
 
@@ -116,6 +118,41 @@ namespace E_Commerce.Controllers
 
             }
             return BadRequest(ModelState);
+        }
+
+        [HttpPost("CreateNewAdmin")]
+         public async Task<ActionResult> CreateNewAdmin( UserDTO userDTO , string role = "Admin")
+        {
+            if (ModelState.IsValid)
+            {
+                UserAccount userAccount = new()
+                {
+                    UserName = userDTO.UserName,
+                    Email = userDTO.Email,
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(userAccount, userDTO.Password);
+
+                if (result.Succeeded)
+                {
+                    if (! await _roleManager.RoleExistsAsync(role))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(role));
+                    }
+
+                    await _userManager.AddToRoleAsync(userAccount, role);
+                    return Ok($"Added a dmin user  Successfuly  with role {role} ");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return BadRequest(ModelState);
+
         }
     }
 }

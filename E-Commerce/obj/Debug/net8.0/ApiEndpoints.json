@@ -499,6 +499,27 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.UserAccountController",
+    "Method": "CreateNewAdmin",
+    "RelativePath": "api/UserAccount/CreateNewAdmin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userDTO",
+        "Type": "E_CommerceDataAccess.DTO.UserDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.UserAccountController",
     "Method": "CreateNewUser",
     "RelativePath": "api/UserAccount/CreateNewUser",
     "HttpMethod": "POST",

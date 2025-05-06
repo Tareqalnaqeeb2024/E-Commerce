@@ -36,7 +36,9 @@ namespace E_Commerce.Controllers
             {
                 product.ImageUrl = $"/images/{product.ImageUrl}";
             }
+
             return Ok(ProductsDTO);
+
         }
 
         [HttpGet("{Id}")]
