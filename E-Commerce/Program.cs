@@ -5,6 +5,7 @@ using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,8 +47,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
+    RequestPath = "/images"
+});
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();

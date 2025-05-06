@@ -25,7 +25,7 @@ namespace E_Commerce.Controllers
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
         {
 
-            var Products = await _context.Products.ToListAsync();
+            var Products = await _context.Products.Include( c => c.Category).ToListAsync();
             if(Products == null)
             {
                 return NotFound();
@@ -34,8 +34,8 @@ namespace E_Commerce.Controllers
 
             foreach (var product in ProductsDTO)
             {
-                product.ImageUrl = Url.Action("DownLoadImage", new { fileName = product.ImageUrl});
-             }
+                product.ImageUrl = $"/images/{product.ImageUrl}";
+            }
             return Ok(ProductsDTO);
         }
 
@@ -56,11 +56,12 @@ namespace E_Commerce.Controllers
             var productDto = _mapper.Map<ProductDTO>(product);
 
 
-            var UploadDirctory = @"E:\MyUploads";
+            var UploadDirctory = @"wwwroot/images";
             var FilePath = Path.Combine(UploadDirctory, product.ImageUrl);
 
 
-            productDto.ImageUrl = Url.Action("DownloadImage", new { fileName = product.ImageUrl });
+            productDto.ImageUrl = Url.Action("DownloadImage", new { fileName = product.ImageUrl});
+            //productDto.ImageUrl = $"{Request.Scheme}://{Request.Host}/images/{product.ImageUrl}";
 
             if (!System.IO.File.Exists(FilePath))
             {
@@ -79,7 +80,7 @@ namespace E_Commerce.Controllers
         [HttpGet("DownloadImage/{fileName}")]
         public IActionResult DownloadImage(string fileName)
         {
-            var uploadDirectory = @"E:\MyUploads";
+            var uploadDirectory = "wwwroot/images";
             var filePath = Path.Combine(uploadDirectory, fileName);
 
             if (!System.IO.File.Exists(filePath))
@@ -98,28 +99,15 @@ namespace E_Commerce.Controllers
 
             var Product = _mapper.Map<Product>(productCreateDTO);
 
-            if(productCreateDTO.ImageFile != null && productCreateDTO.ImageFile.Length > 0)
+            var fileName = Guid.NewGuid() + Path.GetExtension(productCreateDTO.ImageFile.FileName);
+            var filePath = Path.Combine("wwwroot/images", fileName);
 
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                var FileName = Guid.NewGuid() +  Path.GetExtension(productCreateDTO.ImageFile.FileName);
-
-                var uploadDirectory = @"E:\MyUploads";
-                var FilePath = Path.Combine(uploadDirectory, FileName);
-
-                //var directorypath = Path.GetDirectoryName(FilePath);
-
-                if (!Directory.Exists(uploadDirectory))
-                {
-                    Directory.CreateDirectory(uploadDirectory);
-                }
-                using (var stream = new FileStream(FilePath,FileMode.Create))
-                {
-                    await productCreateDTO.ImageFile.CopyToAsync(stream);
-                }
-
-         
-            Product.ImageUrl = FileName;
+                await productCreateDTO.ImageFile.CopyToAsync(stream);
             }
+
+            Product.ImageUrl = fileName;
 
             _context.Products.Add(Product);
             await _context.SaveChangesAsync();
@@ -160,7 +148,7 @@ namespace E_Commerce.Controllers
 
 
             _mapper.Map(updateDTO, product);
-            var uploadDirectory = @"E:\MyUploads";
+            var uploadDirectory = "wwwroot/images";
             if (!string.IsNullOrEmpty(product.ImageUrl))
             {
                 var oldfilepath = Path.Combine(uploadDirectory, product.ImageUrl);
