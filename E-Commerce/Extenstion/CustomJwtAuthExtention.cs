@@ -14,6 +14,7 @@ namespace E_Commerce.Extenstion
                     o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                     o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+
                 }).AddJwtBearer(o =>
                 {
                     o.RequireHttpsMetadata = false;
@@ -24,7 +25,8 @@ namespace E_Commerce.Extenstion
                         ValidIssuer = configuration["JWT:Issuer"],
                         ValidateAudience = false,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"])),
+                        
                     };
                 });
             }

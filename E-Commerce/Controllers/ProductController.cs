@@ -2,6 +2,7 @@
 using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace E_Commerce.Controllers
             _mapper = mapper;
         }
 
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
         {
@@ -93,7 +95,7 @@ namespace E_Commerce.Controllers
 
             return File(image, mimeType); // Returns the file for download
         }
-
+       
         [HttpPost]
         [Consumes("multipart/form-data")]
         public async Task<ActionResult<ProductDTO>> CreateProduct([FromForm] ProductCreateDTO productCreateDTO)
@@ -132,7 +134,7 @@ namespace E_Commerce.Controllers
             };
         }
 
-
+        [Authorize]
         [HttpPut("{Id}")]
 
         public async Task<ActionResult> UpdateProduct(int Id,  ProductUpdateDTO updateDTO)
@@ -175,6 +177,7 @@ namespace E_Commerce.Controllers
 
             return Ok("Update Product Successfuly");
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{Id}")]
         public async Task<ActionResult> DeleteProduct(int Id)
         {

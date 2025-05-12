@@ -10,3 +10,4 @@ E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\refint\E-C
 E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.pdb
 E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\ref\E-CommerceDataBusiness.dll
 E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.csproj.AssemblyReference.cache
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.sourcelink.json

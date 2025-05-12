@@ -218,6 +218,42 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "E_Commerce.Controllers.OrderController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/Order/AllOrders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[E_CommerceDataAccess.DTO.OrderDTO, E-CommerceDataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.OrderController",
+    "Method": "CancelOrder",
+    "RelativePath": "api/Order/CancelOrder{Id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "E_Commerce.Controllers.OrderItemController",
     "Method": "CreateOrderItem",
     "RelativePath": "api/OrderItem",
@@ -499,6 +535,42 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.UserAccountController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/UserAccount/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.UserAccountController",
+    "Method": "GetAllUsers",
+    "RelativePath": "api/UserAccount/AllUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[E_CommerceDataAccess.DTO.UserDTO, E-CommerceDataAccess, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.UserAccountController",
     "Method": "CreateNewAdmin",
     "RelativePath": "api/UserAccount/CreateNewAdmin",
     "HttpMethod": "POST",
@@ -532,6 +604,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.UserAccountController",
+    "Method": "GetDashboardStats",
+    "RelativePath": "api/UserAccount/DashboardStats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

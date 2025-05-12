@@ -2,9 +2,12 @@
 using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace E_Commerce.Controllers
 {
@@ -14,23 +17,41 @@ namespace E_Commerce.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
-
+      
         public OrderController(AppDbContext context , IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
+        [Authorize(Roles = "Admin")]
+        [HttpGet("AllOrders")]
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAllOrders()
         {
             var Orders = await _context.Orders
+                  .Include(u => u.User)
                   .Include(o => o.OrderItems)
                   .ThenInclude(o => o.Product)
                   .ToListAsync();
             var orderDTOs = _mapper.Map<List<OrderDTO>>(Orders);
             return Ok(orderDTOs);
 
+        }
+
+
+        [Authorize] // Ensure only logged-in users can access
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get user ID from token
+
+            var orders = await _context.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .ToListAsync();
+
+            var orderDTOs = _mapper.Map<List<OrderDTO>>(orders);
+            return Ok(orderDTOs);
         }
 
         [HttpGet("{Id}")]
@@ -48,7 +69,7 @@ namespace E_Commerce.Controllers
             }
             return Ok(_mapper.Map<OrderDTO>(order));
         }
-
+        [Authorize]
         [HttpPost]
         public async Task< ActionResult< OrderDTO>> CreateOder(OrderCreateDTO orderCreate)
         {
@@ -65,6 +86,8 @@ namespace E_Commerce.Controllers
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
+           
+
             var createdOrder = await _context.Orders
             .Include(o => o.OrderItems)
                 .ThenInclude(oi => oi.Product)
@@ -76,7 +99,7 @@ namespace E_Commerce.Controllers
 
 
         }
-
+        [Authorize]
         [HttpPut("{Id}")]
 
         public async Task<ActionResult> UpdateOrder(int Id , OrderUpdateDTO updateDTO)
@@ -109,7 +132,7 @@ namespace E_Commerce.Controllers
 
 
         }
-
+        [Authorize]
         [HttpDelete("{Id}")]
         public async Task<ActionResult> DeleteOrder(int Id)
         {
@@ -132,6 +155,40 @@ namespace E_Commerce.Controllers
 
             return Ok("Delete successfuly");
 
+        }
+
+        [Authorize]
+        [HttpPut("CancelOrder{Id}")]
+        public async Task<ActionResult> CancelOrder(int Id)
+
+        {
+            if (Id <= 0)
+            {
+                return BadRequest("Id must be positive.");
+             }
+
+            var order = await _context.Orders
+                   .Include(o => o.OrderItems)
+                   .FirstOrDefaultAsync(o => o.OrderId == Id);
+            if(order == null)
+            {
+                return NotFound("Order not found.");
+            }
+            var IsAdmin = User.IsInRole("Admin");
+            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!IsAdmin && order.UserId != UserId)
+            {
+                return Forbid("You are not authorized to cancel this order.");
+            }
+            if(order.Status != "Pending")
+            {
+                return BadRequest("Only pending orders can be canceled.");
+            }
+            order.Status = "Canceled";
+            await _context.SaveChangesAsync();
+
+            return Ok("Order has been canceled.");
         }
     }
 

@@ -17,6 +17,7 @@ namespace E_CommerceDataAccess.DTO
         public string Email { get; set; }
 
         public string Phone { get; set; }
+        public List<string> Roles { get; set; } = new List<string>();
     }
 
     public class LoginDTO

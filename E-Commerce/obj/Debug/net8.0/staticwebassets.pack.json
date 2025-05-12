@@ -1,8 +1,20 @@
 {
   "Files": [
     {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\292f4b84-cbf6-43df-a598-73d7e45f9eb5.jpg",
+      "PackagePath": "staticwebassets\\images\\292f4b84-cbf6-43df-a598-73d7e45f9eb5.jpg"
+    },
+    {
       "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\2a0c5978-5a4a-433f-bde4-97fe87b2c4c4.jpg",
       "PackagePath": "staticwebassets\\images\\2a0c5978-5a4a-433f-bde4-97fe87b2c4c4.jpg"
+    },
+    {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\3e71d821-f055-47e4-b779-90db71da4f04.jpg",
+      "PackagePath": "staticwebassets\\images\\3e71d821-f055-47e4-b779-90db71da4f04.jpg"
+    },
+    {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\6713737a-7041-4049-9d63-f0af4408d3af.png",
+      "PackagePath": "staticwebassets\\images\\6713737a-7041-4049-9d63-f0af4408d3af.png"
     },
     {
       "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\7406e6d2-8dff-4a53-963a-3256e12bc51a.jpg",
@@ -35,6 +47,14 @@
     {
       "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\da5f21d0-a66d-4fe0-a63a-04927f030784.jpg",
       "PackagePath": "staticwebassets\\images\\da5f21d0-a66d-4fe0-a63a-04927f030784.jpg"
+    },
+    {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\e91c71b1-0604-45b2-8232-5174dda1df71.png",
+      "PackagePath": "staticwebassets\\images\\e91c71b1-0604-45b2-8232-5174dda1df71.png"
+    },
+    {
+      "Id": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\wwwroot\\images\\fb4d885e-18e9-4735-ad0b-889f96249d20.jpg",
+      "PackagePath": "staticwebassets\\images\\fb4d885e-18e9-4735-ad0b-889f96249d20.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.E-Commerce.Microsoft.AspNetCore.StaticWebAssets.props",

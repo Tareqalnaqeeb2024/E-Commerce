@@ -1,10 +1,13 @@
 ﻿using Azure.Identity;
 using E_Commerce.Basic;
+using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,6 +16,7 @@ using System.Text;
 
 namespace E_Commerce.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UserAccountController : ControllerBase
@@ -20,14 +24,17 @@ namespace E_Commerce.Controllers
         public readonly UserManager<UserAccount> _userManager;
         public readonly RoleManager<IdentityRole> _roleManager;
         public readonly JwtSettings _jwtSettings;
+        public readonly AppDbContext _context;
 
-        public UserAccountController( UserManager<UserAccount> userManager, IOptions<JwtSettings> jwtSettings , RoleManager<IdentityRole> roleManager)
+        public UserAccountController( UserManager<UserAccount> userManager, IOptions<JwtSettings> jwtSettings ,
+            RoleManager<IdentityRole> roleManager , AppDbContext context )
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _context = context;
             _jwtSettings = jwtSettings.Value;
         }
-
+       
         [HttpPost("[action]")]
 
         public async Task<IActionResult> CreateNewUser( UserDTO userDTO)
@@ -119,7 +126,7 @@ namespace E_Commerce.Controllers
             }
             return BadRequest(ModelState);
         }
-
+      
         [HttpPost("CreateNewAdmin")]
          public async Task<ActionResult> CreateNewAdmin( UserDTO userDTO , string role = "Admin")
         {
@@ -154,5 +161,67 @@ namespace E_Commerce.Controllers
             return BadRequest(ModelState);
 
         }
-    }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("AllUsers")]
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userDtos = new List<UserDTO>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                userDtos.Add(new UserDTO
+                {
+                    Phone = user.PhoneNumber,
+                    Password = user.PasswordHash,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Roles = roles.ToList()
+                });
+            }
+
+            return Ok(userDtos);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors);
+            }
+
+            return Ok("User deleted successfully");
+        }
+   
+    [Authorize(Roles = "Admin")]
+    [HttpGet("DashboardStats")]
+    public async Task<ActionResult> GetDashboardStats()
+    {
+        var totalOrders = await   _context.Orders.CountAsync();
+        var totalRevenue = await _context.Orders.SumAsync(o => o.TotalAmount);
+        var totalProducts = await _context.Products.CountAsync();
+        var totalUsers = await _context.Users.CountAsync();
+
+            var dashboardStats = new DashboardStatsDto
+            {
+                TotalOrders = totalOrders,
+                TotalRevenue = totalRevenue,
+                TotalProducts = totalProducts,
+                TotalUsers = totalUsers
+              
+            };
+            return Ok(dashboardStats);
+        }
+  }
 }
