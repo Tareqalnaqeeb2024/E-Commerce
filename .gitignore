@@ -1,2 +1,4 @@
 ".vs/" 
 echo 'E-Commerce/*.Controller'
+**/Controllers/
+/Controllers/
