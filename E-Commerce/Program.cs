@@ -1,11 +1,17 @@
 using E_Commerce.Basic;
+using E_Commerce.DataAccess.Repositories;
 using E_Commerce.Extenstion;
 using E_Commerce.MappingProfile;
 using E_CommerceDataAccess.Data;
+using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataAccess.Repositories;
+using E_CommerceDataBusiness.Interfaces;
+using E_CommerceDataBusiness.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +31,19 @@ builder.Services.AddIdentity<UserAccount, IdentityRole>() // Specify your custom
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddCustomJwtAuth(builder.Configuration);
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+
+
+// Register services
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddHttpContextAccessor();
 
 //Auto Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -37,6 +56,7 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader();
     });
 });
+
 
 var app = builder.Build();
 
@@ -51,12 +71,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
-    RequestPath = "/images"
-});
+//app.UseStaticFiles(new StaticFileOptions
+//{
+//    FileProvider = new PhysicalFileProvider(
+//        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
+//    RequestPath = "/images"
+//});
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

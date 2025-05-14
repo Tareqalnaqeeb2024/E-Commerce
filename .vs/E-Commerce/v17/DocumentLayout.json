@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "E:\\BackEndProjects\\E-Commerce\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\services\\orderitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\services\\orderitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\interfaces\\iorderitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\interfaces\\iorderitemservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\repositories\\orderitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\repositories\\orderitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\interfaces\\iorderitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\interfaces\\iorderitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,20 +43,80 @@
       "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\dashboardstatsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\dashboardstatsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\services\\productservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\interfaces\\iproductservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\services\\localfilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\services\\localfilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\interfaces\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\interfaces\\ifilestorageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\e-commerce.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\e-commerce.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\interfaces\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\interfaces\\icategoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\services\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\interfaces\\iorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\interfaces\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\interfaces\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\interfaces\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\interfaces\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|e:\\backendprojects\\e-commerce\\e-commercedatabusiness\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{47F64214-5F33-43D3-BFCB-93960A65E33D}|E-CommerceDataBusiness\\E-CommerceDataBusiness.csproj|solutionrelative:e-commercedatabusiness\\services\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\repositories\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\repositories\\orderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\interfaces\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\interfaces\\iorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\dashboardstatsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\dashboardstatsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\productdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,10 +125,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\mappingprofile\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\mappingprofile\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\orderitemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\extenstion\\customjwtauthextention.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -57,10 +137,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|e:\\backendprojects\\e-commerce\\e-commerce\\basic\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{52610247-335C-4712-BBE6-FB1E7A48DD8A}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\basic\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|solutionrelative:e-commercedataaccess\\dto\\orderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8BA9339D-06BF-4E6C-B48F-A67D61EE2ECB}|E-CommerceDataAccess\\E-CommerceDataAccess.csproj|e:\\backendprojects\\e-commerce\\e-commercedataaccess\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -142,96 +218,103 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DashboardStatsDto.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
-              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
-              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Title": "IOrderItemService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IOrderItemService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Interfaces\\IOrderItemService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IOrderItemService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Interfaces\\IOrderItemService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T19:07:06.571Z",
+              "WhenOpened": "2025-05-14T14:37:56.922Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\OrderController.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "E-Commerce\\Controllers\\OrderController.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "OrderItemRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\OrderItemRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Repositories\\OrderItemRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\OrderItemRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Repositories\\OrderItemRepository.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T13:36:37.722Z",
+              "WhenOpened": "2025-05-14T14:36:15.64Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IOrderItemRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\IOrderItemRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Interfaces\\IOrderItemRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\IOrderItemRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Interfaces\\IOrderItemRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T14:35:50.185Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CategoryController.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\CategoryController.cs",
-              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\CategoryController.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\CategoryController.cs",
-              "RelativeToolTip": "E-Commerce\\Controllers\\CategoryController.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAQwGcAAAAAAAAAAAAAAA==",
+              "Title": "ProductController.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\ProductController.cs",
+              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\ProductController.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\ProductController.cs",
+              "RelativeToolTip": "E-Commerce\\Controllers\\ProductController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T13:04:27.081Z",
+              "WhenOpened": "2025-04-29T20:33:31.601Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
+              "Title": "ProductService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\ProductService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Services\\ProductService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\ProductService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Services\\ProductService.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAuwGQAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:25:11.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "OrderItemController.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\OrderItemController.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\OrderItemController.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\OrderItemController.cs",
               "RelativeToolTip": "E-Commerce\\Controllers\\OrderItemController.cs",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAQwIIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFUAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T12:53:05.048Z"
+              "WhenOpened": "2025-05-01T12:53:05.048Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserDTO.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\UserDTO.cs",
-              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\UserDTO.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\UserDTO.cs",
-              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\UserDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-27T19:29:11.643Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProductDTO.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\ProductDTO.cs",
-              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\ProductDTO.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\ProductDTO.cs",
-              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\ProductDTO.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABUAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:29:41.815Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Program.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Program.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Program.cs",
               "RelativeToolTip": "E-Commerce\\Program.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAuwCUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-27T19:31:28.535Z",
               "EditorCaption": ""
@@ -239,43 +322,289 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "OrderItemService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\OrderItemService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Services\\OrderItemService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\OrderItemService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Services\\OrderItemService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-14T14:38:18.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IProductService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IProductService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Interfaces\\IProductService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IProductService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Interfaces\\IProductService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAuwBAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:24:36.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "CategoryController.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\CategoryController.cs",
+              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\CategoryController.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\CategoryController.cs",
+              "RelativeToolTip": "E-Commerce\\Controllers\\CategoryController.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwE0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T13:04:27.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\OrderController.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "E-Commerce\\Controllers\\OrderController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAF4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T13:36:37.722Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "UserAccountController.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\UserAccountController.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\UserAccountController.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\UserAccountController.cs",
               "RelativeToolTip": "E-Commerce\\Controllers\\UserAccountController.cs",
-              "ViewState": "AgIAAMgAAAAAAAAAAAAQwN8AAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-27T19:35:09.973Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductController.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\ProductController.cs",
-              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\ProductController.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\ProductController.cs",
-              "RelativeToolTip": "E-Commerce\\Controllers\\ProductController.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAQwFYAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 13,
+              "Title": "IFileStorageService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IFileStorageService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Interfaces\\IFileStorageService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IFileStorageService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Interfaces\\IFileStorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:33:31.601Z"
+              "WhenOpened": "2025-05-13T21:30:23.444Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
+              "Title": "E-Commerce.csproj",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\E-Commerce.csproj",
+              "RelativeDocumentMoniker": "E-Commerce\\E-Commerce.csproj",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\E-Commerce.csproj",
+              "RelativeToolTip": "E-Commerce\\E-Commerce.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-13T21:31:46.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LocalFileStorageService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\LocalFileStorageService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Services\\LocalFileStorageService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\LocalFileStorageService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Services\\LocalFileStorageService.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAGMAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T21:32:50.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Repositories\\ProductRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\ProductRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Repositories\\ProductRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:26:06.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ICategoryService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\ICategoryService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Interfaces\\ICategoryService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\ICategoryService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Interfaces\\ICategoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:21:43.587Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\CategoryService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Services\\CategoryService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\CategoryService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Services\\CategoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:22:05.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IOrderService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IOrderService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Interfaces\\IOrderService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Interfaces\\IOrderService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Interfaces\\IOrderService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAsAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T17:55:51.251Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Repositories\\CategoryRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\CategoryRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Repositories\\CategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:23:41.312Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IProductRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\IProductRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Interfaces\\IProductRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\IProductRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Interfaces\\IProductRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:28:08.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ICategoryRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\ICategoryRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Interfaces\\ICategoryRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\ICategoryRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Interfaces\\ICategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T19:27:28.583Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "IOrderRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\IOrderRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Interfaces\\IOrderRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Interfaces\\IOrderRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Interfaces\\IOrderRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T17:52:48.499Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DashboardStatsDto.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\DashboardStatsDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-12T19:07:06.571Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "UserDTO.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\UserDTO.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\UserDTO.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\UserDTO.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\UserDTO.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwAsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-27T19:29:11.643Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "ProductDTO.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\ProductDTO.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\ProductDTO.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\ProductDTO.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\ProductDTO.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAABBwBUAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-29T20:29:41.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "OrderRepository.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\OrderRepository.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\Repositories\\OrderRepository.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Repositories\\OrderRepository.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\Repositories\\OrderRepository.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAB4AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T17:54:17.979Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\OrderService.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Services\\OrderService.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Services\\OrderService.cs",
+              "RelativeToolTip": "E-CommerceDataBusiness\\Services\\OrderService.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAQwBEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-13T17:57:32.494Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "OrderDTO.cs",
+              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\OrderDTO.cs",
+              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\OrderDTO.cs",
+              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\OrderDTO.cs",
+              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\OrderDTO.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwBoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-01T13:32:40.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
               "Title": "Order.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\Order.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Models\\Order.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\Order.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Models\\Order.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAABBwAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T19:33:32.371Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 32,
               "Title": "appsettings.json",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\appsettings.json",
               "RelativeDocumentMoniker": "E-Commerce\\appsettings.json",
@@ -287,19 +616,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 30,
               "Title": "MappingProfile.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\MappingProfile\\MappingProfile.cs",
               "RelativeDocumentMoniker": "E-Commerce\\MappingProfile\\MappingProfile.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\MappingProfile\\MappingProfile.cs",
               "RelativeToolTip": "E-Commerce\\MappingProfile\\MappingProfile.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-29T18:07:33.383Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 31,
               "Title": "CustomJwtAuthExtention.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Extenstion\\CustomJwtAuthExtention.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Extenstion\\CustomJwtAuthExtention.cs",
@@ -311,7 +640,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 33,
               "Title": "JwtSettings.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Basic\\JwtSettings.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Basic\\JwtSettings.cs",
@@ -323,19 +652,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "OrderDTO.cs",
-              "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\OrderDTO.cs",
-              "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\OrderDTO.cs",
-              "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\OrderDTO.cs",
-              "RelativeToolTip": "E-CommerceDataAccess\\DTO\\OrderDTO.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABoAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T13:32:40.339Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 34,
               "Title": "Category.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\Category.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Models\\Category.cs",
@@ -347,19 +664,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 41,
               "Title": "OrderItem.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\OrderItem.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Models\\OrderItem.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\OrderItem.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Models\\OrderItem.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAABBwBQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T19:25:48.677Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 35,
               "Title": "dbo.AspNetUserLogins.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.AspNetUserLogins.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.AspNetUserLogins.sql",
@@ -368,19 +685,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 38,
               "Title": "OrderItemDTO.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\OrderItemDTO.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\OrderItemDTO.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\OrderItemDTO.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\DTO\\OrderItemDTO.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAABwAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAABBwBwAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-01T12:38:04.13Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 36,
               "Title": "dbo.AspNetUserTokens.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.AspNetUserTokens.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.AspNetUserTokens.sql",
@@ -389,7 +706,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 37,
               "Title": "dbo.Products.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.Products.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.Products.sql",
@@ -398,19 +715,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 51,
               "Title": "20250428192358_AddedCategoryAndProductTables.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250428192358_AddedCategoryAndProductTables.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Migrations\\20250428192358_AddedCategoryAndProductTables.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250428192358_AddedCategoryAndProductTables.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Migrations\\20250428192358_AddedCategoryAndProductTables.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T19:23:58.263Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 39,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\WeatherForecastController.cs",
@@ -422,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 40,
               "Title": "dbo.AspNetUsers.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.AspNetUsers.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/ECommerce2/True/SqlTable/dbo.AspNetUsers.sql",
@@ -431,7 +748,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 42,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Data\\AppDbContext.cs",
@@ -443,7 +760,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 43,
               "Title": "CategoryDTO.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\DTO\\CategoryDTO.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\DTO\\CategoryDTO.cs",
@@ -455,43 +772,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 44,
               "Title": "Product.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\Product.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Models\\Product.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\Product.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Models\\Product.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAAABMAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAABBwBMAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T18:59:37.879Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 52,
               "Title": "20250429183550_UpdateCategoryToCategories.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250429183550_UpdateCategoryToCategories.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Migrations\\20250429183550_UpdateCategoryToCategories.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250429183550_UpdateCategoryToCategories.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Migrations\\20250429183550_UpdateCategoryToCategories.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADEAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-29T18:35:50.78Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 45,
               "Title": "20250428213519_AddedOrderAndOrderItemsTables.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250428213519_AddedOrderAndOrderItemsTables.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Migrations\\20250428213519_AddedOrderAndOrderItemsTables.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250428213519_AddedOrderAndOrderItemsTables.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Migrations\\20250428213519_AddedOrderAndOrderItemsTables.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-28T21:35:19.511Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 46,
               "Title": "UserAccount.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Models\\UserAccount.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Models\\UserAccount.cs",
@@ -503,7 +820,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 47,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-Commerce\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "E-Commerce\\WeatherForecast.cs",
@@ -515,19 +832,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 50,
               "Title": "20250427224951_AddUserAccountTable.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250427224951_AddUserAccountTable.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Migrations\\20250427224951_AddUserAccountTable.cs",
               "ToolTip": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Migrations\\20250427224951_AddUserAccountTable.cs",
               "RelativeToolTip": "E-CommerceDataAccess\\Migrations\\20250427224951_AddUserAccountTable.cs",
-              "ViewState": "AgIAALIAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAALAAAAAAAAAAAABRwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-27T22:49:51.686Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 48,
               "Title": "Class1.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataBusiness\\Class1.cs",
               "RelativeDocumentMoniker": "E-CommerceDataBusiness\\Class1.cs",
@@ -539,7 +856,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 49,
               "Title": "Class1.cs",
               "DocumentMoniker": "E:\\BackEndProjects\\E-Commerce\\E-CommerceDataAccess\\Class1.cs",
               "RelativeDocumentMoniker": "E-CommerceDataAccess\\Class1.cs",
@@ -558,10 +875,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         },

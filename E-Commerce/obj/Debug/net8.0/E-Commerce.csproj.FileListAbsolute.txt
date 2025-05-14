@@ -173,3 +173,7 @@ E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\Microsoft.AspNetCore.A
 E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\AutoMapper.dll
 E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\E-Commerce.staticwebassets.runtime.json
 E:\BackEndProjects\E-Commerce\E-Commerce\obj\Debug\net8.0\E-Commerce.sourcelink.json
+E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\E-CommerceDataBusiness.dll
+E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\E-CommerceDataBusiness.pdb
+E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+E:\BackEndProjects\E-Commerce\E-Commerce\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll

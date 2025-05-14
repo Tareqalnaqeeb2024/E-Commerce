@@ -11,3 +11,6 @@ E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-Commerce
 E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\ref\E-CommerceDataBusiness.dll
 E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.csproj.AssemblyReference.cache
 E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-CommerceDataBusiness.sourcelink.json
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\bin\Debug\net8.0\E-CommerceDataAccess.dll
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\bin\Debug\net8.0\E-CommerceDataAccess.pdb
+E:\BackEndProjects\E-Commerce\E-CommerceDataBusiness\obj\Debug\net8.0\E-Commer.A2A34692.Up2Date

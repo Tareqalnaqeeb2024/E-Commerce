@@ -9,6 +9,7 @@ namespace E_CommerceDataAccess.DTO
 {
     public class UserDTO
     {
+        public string userId { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]
