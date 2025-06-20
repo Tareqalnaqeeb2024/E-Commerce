@@ -8,9 +8,14 @@ using E_CommerceDataAccess.Models;
 using E_CommerceDataAccess.Repositories;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Services;
+using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using E_CommerceDataBusiness;
+using E_CommerceDataBusiness.BackgroundServices;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,7 +48,18 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+
+builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
+builder.Services.AddHostedService<OrderCreatedConsumer>();
 builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddSingleton<RabbitMQ.Client.IConnectionFactory>(sp =>
+    new ConnectionFactory
+    {
+        HostName = builder.Configuration["RabbitMQ:HostName"],
+        UserName = builder.Configuration["RabbitMQ:UserName"],
+        Password = builder.Configuration["RabbitMQ:Password"]
+    });
 
 //Auto Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));

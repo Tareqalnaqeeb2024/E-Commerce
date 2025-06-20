@@ -3,7 +3,10 @@ using E_CommerceDataAccess.DTO;
 using E_CommerceDataBusiness.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System.Security.Claims;
+using System.Text;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -50,6 +53,23 @@ public class OrderController : ControllerBase
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var order = await _orderService.CreateOrderAsync(orderCreate, userId);
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+        using (var connection = factory.CreateConnection())
+        using (var channel = connection.CreateModel())
+        {
+            channel.QueueDeclare(queue: "orders",
+                                durable: true,
+                                exclusive: false,
+                                autoDelete: false,
+                                arguments: null);
+
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(order));
+            channel.BasicPublish(exchange: "",
+                                routingKey: "orders",
+                                basicProperties: null,
+                                body: body);
+        }
+        //return Ok();
         return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
     }
 
