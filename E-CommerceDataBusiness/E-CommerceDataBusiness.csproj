@@ -18,4 +18,8 @@
     <ProjectReference Include="..\E-CommerceDataAccess\E-CommerceDataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="BackgroundServices\" />
+  </ItemGroup>
+
 </Project>

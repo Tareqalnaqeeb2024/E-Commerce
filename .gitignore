@@ -1,2 +1,10 @@
-".vs/" 
-/Controllers/
+
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+*.dll
+*.exe
