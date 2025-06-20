@@ -1,4 +1,8 @@
-".vs/" 
-echo 'E-Commerce/*.Controller'
-**/Controllers/
-/Controllers/
+.vs/
+bin/
+obj/
+*.suo
+*.user
+*.cache
+*.FileListAbsolute.txt
+*.assets.cache
