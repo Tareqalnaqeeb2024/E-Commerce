@@ -12,5 +12,6 @@ namespace E_CommerceDataAccess.DTO
         public decimal TotalRevenue { get; set; }
         public int TotalProducts { get; set; }
         public int TotalUsers { get; set; }
+        public List<OrderDTO> RecentOrders { get; set; } 
     }
  }

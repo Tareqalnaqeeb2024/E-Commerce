@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vs/
 bin/
 obj/
@@ -6,3 +7,15 @@ obj/
 *.cache
 *.FileListAbsolute.txt
 *.assets.cache
+=======
+
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.pdb
+*.dll
+*.exe
+>>>>>>> tempbranch
