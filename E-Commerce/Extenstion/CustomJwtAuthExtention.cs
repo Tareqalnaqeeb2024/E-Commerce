@@ -25,7 +25,7 @@ namespace E_Commerce.Extenstion
                         ValidIssuer = configuration["JWT:Issuer"],
                         ValidateAudience = false,
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"])),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"])),
                         
                     };
                 });

@@ -1,5 +1,4 @@
-﻿using E_CommerceDataBusiness.Interfaces;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client;
 using System;
@@ -11,6 +10,7 @@ using Newtonsoft.Json;
 using E_CommerceDataAccess.Models;
 using Microsoft.Extensions.DependencyInjection;
 using E_CommerceDataAccess.Data;
+using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 
 namespace E_CommerceDataBusiness.BackgroundServices
 {

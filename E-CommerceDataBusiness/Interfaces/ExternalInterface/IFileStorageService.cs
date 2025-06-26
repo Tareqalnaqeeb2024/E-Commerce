@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace E_CommerceDataBusiness.Interfaces
+namespace E_CommerceDataBusiness.Interfaces.ExternalInterface
 {
     // E_CommerceDataBusiness/Interfaces/IFileStorageService.cs
     public interface IFileStorageService

@@ -1,10 +1,10 @@
-﻿using E_CommerceDataBusiness.Interfaces;
+﻿using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 
-namespace E_CommerceDataBusiness.Services
+namespace E_CommerceDataBusiness.Services.ExternalServices
 {
     public class RabbitMQService : IRabbitMQService, IDisposable
     {

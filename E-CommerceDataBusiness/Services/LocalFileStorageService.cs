@@ -83,7 +83,7 @@
 //        }
 //    }
 //}
-using E_CommerceDataBusiness.Interfaces;
+using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;

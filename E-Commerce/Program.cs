@@ -16,6 +16,11 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using E_CommerceDataBusiness;
 using E_CommerceDataBusiness.BackgroundServices;
+using E_Commerce.Business.Services;
+using StackExchange.Redis;
+using E_CommerceDataBusiness.Basic;
+using E_CommerceDataBusiness.Interfaces.ExternalInterface;
+using E_CommerceDataBusiness.Services.ExternalServices;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -48,11 +53,21 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<IRedisService, RedisService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("MailSettings"));
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
 builder.Services.AddHostedService<OrderCreatedConsumer>();
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
+    ConnectionMultiplexer.Connect("localhost:6379"));
 builder.Services.AddSingleton<RabbitMQ.Client.IConnectionFactory>(sp =>
     new ConnectionFactory
     {

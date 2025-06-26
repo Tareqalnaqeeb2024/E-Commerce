@@ -3,6 +3,7 @@ using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using E_CommerceDataBusiness.Interfaces;
+using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 
 public class ProductService : IProductService
 {

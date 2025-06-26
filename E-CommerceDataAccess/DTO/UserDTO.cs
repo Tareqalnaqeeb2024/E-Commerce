@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,15 +19,49 @@ namespace E_CommerceDataAccess.DTO
         public string Email { get; set; }
 
         public string Phone { get; set; }
-        public List<string> Roles { get; set; } = new List<string>();
+        public string  Roles { get; set; } 
     }
-
     public class LoginDTO
     {
-        [Required]
         public string UserName { get; set; }
-        [Required]
         public string Password { get; set; }
     }
+
+    public class ForgetPasswordDto
+    {
+        public string Email { get; set; }
+    }
+
+    public class ResetPasswordDto
+    {
+        public string Email { get; set; }
+        public string Token { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmNewPassword { get; set; }
+    }
+
+    public class AuthResponse
+    {
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
+        public UserDTO User { get; set; }
+    }
+    public class TokenDTO
+    {
+        public string UserId { get; set; }
+        public string Name { get; set; }
+
+        public string Email { get; set; }
+        
+
+        public string Token { get; set; }
+    }
+
+    public class VerfiyCodeDto
+    {
+        public string Email { get; set; }
+        public string CodeOTP { get; set; }
+    }
+
 
 }
