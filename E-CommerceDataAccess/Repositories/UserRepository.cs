@@ -87,7 +87,8 @@ namespace E_CommerceDataAccess.Repositories
             {
                 UserName = userDto.UserName,
                 Email = userDto.Email,
-                PhoneNumber = userDto.Phone
+                PhoneNumber = userDto.Phone,
+                
             };
 
             var result = await _userManager.CreateAsync(userAccount, userDto.Password);

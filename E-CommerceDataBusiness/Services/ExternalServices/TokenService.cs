@@ -29,18 +29,22 @@ namespace E_CommerceDataBusiness.Services.ExternalServices
 
         public async Task<string> GenerateTokenAsync(UserAccount user)
         {
-            var Claims = new List<Claim>();
+            var Claims = new List<Claim>
+            {
 
-            Claims.Add(new Claim(ClaimTypes.Name, user.UserName));
-            Claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
-            Claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+            new Claim(ClaimTypes.Name, user.UserName),
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
+             new Claim("userId", user.Id),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+             
+            
+            };
 
             var roles = await _userManager.GetRolesAsync(user);
 
             Claims.Add(new Claim(ClaimTypes.Role, roles.ToString()));
 
-
-
+           
             //second Get SigningCredentials
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));

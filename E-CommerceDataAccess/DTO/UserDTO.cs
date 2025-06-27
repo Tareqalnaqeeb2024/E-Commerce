@@ -21,6 +21,21 @@ namespace E_CommerceDataAccess.DTO
         public string Phone { get; set; }
         public string  Roles { get; set; } 
     }
+    public class RegisterDTO
+    {
+
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string Password { get; set; }
+        [Required]
+        public string ConfirmPassword { get; set; }
+        [Required]
+        public string Email { get; set; }
+
+        public string Phone { get; set; }
+       
+    }
     public class LoginDTO
     {
         public string UserName { get; set; }
@@ -48,12 +63,11 @@ namespace E_CommerceDataAccess.DTO
     }
     public class TokenDTO
     {
-        public string UserId { get; set; }
-        public string Name { get; set; }
+      
 
         public string Email { get; set; }
         
-
+        public string UserID { get; set; }
         public string Token { get; set; }
     }
 

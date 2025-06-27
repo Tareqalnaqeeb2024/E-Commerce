@@ -23,6 +23,8 @@ namespace E_Commerce.MappingProfile
             CreateMap<OrderItemCreateDTO, OrderItem>();
             CreateMap<OrderItemUpdateDTO, OrderItem>();
 
+          
+
 
             CreateMap<Order, OrderDTO>();
             CreateMap<OrderCreateDTO, Order>();

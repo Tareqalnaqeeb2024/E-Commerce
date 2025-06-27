@@ -9,6 +9,7 @@ namespace E_CommerceDataBusiness.Interfaces
 {
    public interface IAccountService
     {
+        Task<TokenDTO> RegisterAsync(RegisterDTO registerDTO);
         Task<TokenDTO> LoginAsync(LoginDTO loginDTO);
         Task<string> ForgotPasswordAsync (ForgetPasswordDto forgetPasswordDto);
         Task<bool> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);

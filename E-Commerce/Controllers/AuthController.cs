@@ -17,14 +17,36 @@ namespace E_Commerce.Controllers
         {
             _accountService = accountService;
         }
-
-        [HttpPost("Login")]
-        public async Task<ActionResult<BaseResponse<TokenDTO>>> Login(LoginDTO loginDto)
+        [HttpPost("reigster")]
+        public async Task<ActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
 
-            var result = await _accountService.LoginAsync(loginDto);
+            try
+            {
+                var reslut = await _accountService.RegisterAsync(registerDTO);
+                return Ok(reslut);
 
-            return result != null ? Ok(result) : BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDto)
+        {
+            try
+            {
+                var result = await _accountService.LoginAsync(loginDto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                return Unauthorized(ex.Message);
+            }
 
         }
         [HttpPut("ResetPassword")]
