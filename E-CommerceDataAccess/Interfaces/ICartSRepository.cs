@@ -1,0 +1,19 @@
+﻿using E_CommerceDataAccess.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace E_CommerceDataAccess.Interfaces
+{
+    public interface ICartSRepository
+    {
+        Task<CartDTO> GetCartAsync(string UserId);
+        Task AddToCartAsync(CreateCartItemDTO cartItemDTO , string UserId);
+        Task RemoveFromCartAsync(string UserId , int ProductId);
+        Task IncrementItemQuantityAsnyc(int ProductId , string UserID);
+        Task DecrementItemQuantityAsnyc(string UserId , int ProductId);
+
+    }
+}

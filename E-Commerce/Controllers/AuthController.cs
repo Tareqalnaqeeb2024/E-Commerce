@@ -50,22 +50,33 @@ namespace E_Commerce.Controllers
 
         }
         [HttpPut("ResetPassword")]
-        public async Task<ActionResult> ResetPassword(ResetPasswordDto resetPassword)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto resetPassword)
         {
-            var result = await _accountService.ResetPasswordAsync(resetPassword);
-            return result ? Ok(result) : BadRequest(result);
+            try
+            {
+                var result = await _accountService.ResetPasswordAsync(resetPassword);
+                return Ok(result);
+            }
+
+            
+            catch (Exception ex) 
+            {
+                return BadRequest(ex.Message);
+            }
+
+                
         }
 
         [HttpPost("ForgetPassword")]
-        public async Task<ActionResult<BaseResponse<string>>> ForgetPassword([FromBody] ForgetPasswordDto request)
+        public async Task<IActionResult> ForgetPassword([FromBody] ForgetPasswordDto request)
         {
 
             var result = await _accountService.ForgotPasswordAsync(request);
-            return result != null ? Ok(result) : BadRequest(result);
+            return result != null ? Ok(result) : NotFound(result);
         }
 
         [HttpPost("VerifyOTP")]
-        public async Task<ActionResult<BaseResponse<bool>>> VerifyOTP([FromBody] VerfiyCodeDto verify)
+        public async Task<IActionResult> VerifyOTP([FromBody] VerfiyCodeDto verify)
         {
 
             var result = await _accountService.VerifyOTPAsync(verify);

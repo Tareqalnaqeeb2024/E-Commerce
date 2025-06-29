@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,8 @@ namespace E_CommerceDataAccess.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> Items { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -57,6 +60,13 @@ namespace E_CommerceDataAccess.Data
                     .HasForeignKey(o => o.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
+            builder.Entity<Cart>()
+             .HasMany(c => c.Items)
+             .WithOne(ci => ci.Cart)
+             .HasForeignKey(ci => ci.CartId);
+
+            builder.Entity<CartItem>()
+               .HasKey(ci => new { ci.CartId, ci.ProductId });
 
 
         }
