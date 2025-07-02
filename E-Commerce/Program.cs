@@ -21,6 +21,8 @@ using StackExchange.Redis;
 using E_CommerceDataBusiness.Basic;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using E_CommerceDataBusiness.Services.ExternalServices;
+using E_Commerce.Hubs;
+using E_CommerceDataBusiness.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,7 +32,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenJWTAuth();
+
 
 builder.Services.AddDbContextFactory<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString")),
@@ -66,7 +69,7 @@ builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Mail
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
-builder.Services.AddHostedService<OrderCreatedConsumer>();
+//builder.Services.AddHostedService<OrderCreatedConsumer>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
     ConnectionMultiplexer.Connect("localhost:6379"));
@@ -80,16 +83,21 @@ builder.Services.AddSingleton<RabbitMQ.Client.IConnectionFactory>(sp =>
 
 //Auto Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin() // Or .WithOrigins("https://yourfrontend.com")
+        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5501") // Or .WithOrigins("https://yourfrontend.com")
               .AllowAnyMethod()
-              .AllowAnyHeader();
+              .AllowAnyHeader()
+              .AllowCredentials();
     });
 });
 
+//after Cors
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -101,20 +109,18 @@ if (app.Environment.IsDevelopment())
 }
 
 
+//app.MapHub<NotificationHub>("/notificationHub");
+
 
 app.UseHttpsRedirection();
-app.UseCors("AllowFrontend");
-//app.UseStaticFiles(new StaticFileOptions
-//{
-//    FileProvider = new PhysicalFileProvider(
-//        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images")),
-//    RequestPath = "/images"
-//});
 app.UseStaticFiles();
-app.UseRouting();
+app.UseRouting(); // ÌÃ» √‰ ÌﬂÊ‰ √Ê·«
+app.UseCors("AllowAll"); // À„ CORS
 app.UseAuthentication();
 app.UseAuthorization();
 
+// «·¬‰ Ì„ﬂ‰  ⁄ÌÌ‰ «· hubs Ê«· controllers
+app.MapHub<ProductHub>("/productHub");
 app.MapControllers();
 
 app.Run();

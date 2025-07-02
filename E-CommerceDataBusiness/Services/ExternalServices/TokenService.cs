@@ -35,9 +35,10 @@ namespace E_CommerceDataBusiness.Services.ExternalServices
             new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.NameIdentifier, user.Id),
              new Claim("userId", user.Id),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-             
-            
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+              new Claim(ClaimTypes.Role, "Admin")
+
+
             };
 
             var roles = await _userManager.GetRolesAsync(user);

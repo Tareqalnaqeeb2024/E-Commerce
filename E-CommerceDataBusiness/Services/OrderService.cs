@@ -2,7 +2,11 @@
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataBusiness.Hubs;
 using E_CommerceDataBusiness.Interfaces;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +19,16 @@ namespace E_CommerceDataBusiness.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
+        private readonly IHubContext<ProductHub> _hubContext;
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper)
+        public OrderService(IOrderRepository orderRepository, IMapper mapper , IProductRepository productRepository , IHubContext<ProductHub> hubContext)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
+            _productRepository = productRepository;
+            _hubContext = hubContext;
         }
 
         public async Task<IEnumerable<OrderDTO>> GetAllOrdersAsync()
@@ -47,9 +55,27 @@ namespace E_CommerceDataBusiness.Services
             order.UserId = userId;
             order.OrderDate = DateTime.UtcNow;
             order.Status = "Pending";
-            order.TotalAmount = orderCreate.OrderItems.Sum(oi => oi.Price * oi.Quantity);
+
+     
+
+            foreach (var item in order.OrderItems)
+            {
+                var product =  await _productRepository.GetByIdAsync(item.ProductId);
+
+
+                if (product == null || product.StockQuantity < item.Quantity)
+                    throw new Exception("Quantity Not Exists");
+
+                product.StockQuantity -= item.Quantity;
+                await _productRepository.UpdateAsync(product);
+
+
+                await _hubContext.Clients.All.SendAsync("ReceiveStockUpdate", product.ProductId, product.StockQuantity);
+
+            }
 
             var createdOrder = await _orderRepository.AddAsync(order);
+
             return _mapper.Map<OrderDTO>(createdOrder);
         }
 

@@ -19,7 +19,7 @@ public class OrderController : ControllerBase
         _orderService = orderService;
     }
 
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [HttpGet("AllOrders")]
     public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAllOrders()
     {
@@ -27,7 +27,7 @@ public class OrderController : ControllerBase
         return Ok(orders);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
     {
@@ -47,7 +47,7 @@ public class OrderController : ControllerBase
         return Ok(order);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost]
     public async Task<ActionResult<OrderDTO>> CreateOrder(OrderCreateDTO orderCreate)
     {
@@ -73,7 +73,7 @@ public class OrderController : ControllerBase
         return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateOrder(int id, OrderUpdateDTO updateDTO)
     {
@@ -86,7 +86,7 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteOrder(int id)
     {
@@ -99,7 +99,7 @@ public class OrderController : ControllerBase
         return Ok("Delete successfully");
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPut("CancelOrder/{id}")]
     public async Task<ActionResult> CancelOrder(int id)
     {
