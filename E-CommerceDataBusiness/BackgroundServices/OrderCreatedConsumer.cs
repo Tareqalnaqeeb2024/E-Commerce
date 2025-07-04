@@ -11,6 +11,8 @@ using E_CommerceDataAccess.Models;
 using Microsoft.Extensions.DependencyInjection;
 using E_CommerceDataAccess.Data;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
+using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.Interfaces;
 
 namespace E_CommerceDataBusiness.BackgroundServices
 {
@@ -18,11 +20,15 @@ namespace E_CommerceDataBusiness.BackgroundServices
     {
         private readonly IRabbitMQService _rabbitmqService;
         private readonly IServiceProvider _serviceProvider;
+        //private readonly IUserRepository  _userRepository;
+        private readonly IEmailService _emailService;
 
-        public OrderCreatedConsumer(IRabbitMQService rabbitmqService, IServiceProvider serviceProvider)
+        public OrderCreatedConsumer(IRabbitMQService rabbitmqService, IServiceProvider serviceProvider,  IEmailService emailService)
         {
             _rabbitmqService = rabbitmqService;
             _serviceProvider = serviceProvider;
+            //_userRepository = userRepository;
+            _emailService = emailService;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -56,6 +62,11 @@ namespace E_CommerceDataBusiness.BackgroundServices
                             {
                                 existingOrder.Status = "Completed";
                                 await dbContext.SaveChangesAsync();
+
+                                var user = await dbContext.Users.FindAsync(existingOrder.UserId);
+                                await _emailService.SendEmailAsync(user.Email, " // Created New Order //", $"Hello {user.UserName} Your Order with Id {existingOrder.OrderId} has  Complated Staust");
+
+
                                 //_logger.LogInformation($"Processed Order: {order.OrderId}");
                             }
                         }

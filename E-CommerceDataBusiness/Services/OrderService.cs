@@ -4,6 +4,7 @@ using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using E_CommerceDataBusiness.Hubs;
 using E_CommerceDataBusiness.Interfaces;
+using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,13 +23,18 @@ namespace E_CommerceDataBusiness.Services
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
         private readonly IHubContext<ProductHub> _hubContext;
+        private readonly IEmailService _emailService;
+        private readonly IUserRepository  _userRepository;
 
-        public OrderService(IOrderRepository orderRepository, IMapper mapper , IProductRepository productRepository , IHubContext<ProductHub> hubContext)
+        public OrderService(IOrderRepository orderRepository, IMapper mapper , IProductRepository productRepository , IHubContext<ProductHub> hubContext ,
+             IEmailService emailService , IUserRepository userRepository)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _productRepository = productRepository;
             _hubContext = hubContext;
+            _emailService = emailService;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<OrderDTO>> GetAllOrdersAsync()
@@ -76,6 +82,9 @@ namespace E_CommerceDataBusiness.Services
 
             var createdOrder = await _orderRepository.AddAsync(order);
 
+            UserDTO user = await _userRepository.GetUserByIdAsync(userId);
+
+          await   _emailService.SendEmailAsync(user.Email," // Created New Order //" ,$"Hello {user.UserName} Your Order with Id {createdOrder.OrderId} has Created with Panding Staust");
             return _mapper.Map<OrderDTO>(createdOrder);
         }
 

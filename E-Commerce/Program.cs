@@ -66,10 +66,10 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICartService,CartService>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("MailSettings"));
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
 
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
-//builder.Services.AddHostedService<OrderCreatedConsumer>();
+builder.Services.AddHostedService<OrderCreatedConsumer>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
     ConnectionMultiplexer.Connect("localhost:6379"));
@@ -89,7 +89,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5501") // Or .WithOrigins("https://yourfrontend.com")
+        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5501") // Or .WithOrigins("http://127.0.0.1:5500/")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();
