@@ -1,6 +1,5 @@
-# E-Commerce_WebAPI
- -E-Commerce Restful API with .NET 8, utilizes AspNetCore.Identity for user management.
- -This API allow users to view products by categories and brand, manage carts, and complete purchases checkout.
+📌 Project Overview
+This is a modern e-commerce API built with ASP.NET Core, featuring robust architecture with layered services, real-time capabilities, and scalable infrastructure. The solution includes user management, product catalog, order processing, cart functionality, and real-time notifications.
 
  ## Features
  - User registeration and account management.
