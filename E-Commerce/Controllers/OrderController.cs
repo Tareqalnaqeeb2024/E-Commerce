@@ -1,6 +1,7 @@
 ﻿// E_Commerce.API/Controllers/OrderController.cs
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataBusiness.Interfaces;
+using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -13,13 +14,15 @@ using System.Text;
 public class OrderController : ControllerBase
 {
     private readonly IOrderService _orderService;
+    private readonly IRabbitMQService  _rabbitMQService;
 
-    public OrderController(IOrderService orderService)
+    public OrderController(IOrderService orderService , IRabbitMQService rabbitMQService)
     {
         _orderService = orderService;
+        _rabbitMQService = rabbitMQService;
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [HttpGet("AllOrders")]
     public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAllOrders()
     {
@@ -27,7 +30,7 @@ public class OrderController : ControllerBase
         return Ok(orders);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
     {
@@ -47,33 +50,34 @@ public class OrderController : ControllerBase
         return Ok(order);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult<OrderDTO>> CreateOrder(OrderCreateDTO orderCreate)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var order = await _orderService.CreateOrderAsync(orderCreate, userId);
-        var factory = new ConnectionFactory() { HostName = "localhost" };
-        using (var connection = factory.CreateConnection())
-        using (var channel = connection.CreateModel())
-        {
-            channel.QueueDeclare(queue: "orders",
-                                durable: true,
-                                exclusive: false,
-                                autoDelete: false,
-                                arguments: null);
+        //var factory = new ConnectionFactory() { HostName = "localhost" };
+        //using (var connection = factory.CreateConnection())
+        //using (var channel = connection.CreateModel())
+        //{
+        //    channel.QueueDeclare(queue: "orders",
+        //                        durable: true,
+        //                        exclusive: false,
+        //                        autoDelete: false,
+        //                        arguments: null);
 
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(order));
-            channel.BasicPublish(exchange: "",
-                                routingKey: "orders",
-                                basicProperties: null,
-                                body: body);
-        }
+        //    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(order));
+        //    channel.BasicPublish(exchange: "",
+        //                        routingKey: "orders",
+        //                        basicProperties: null,
+        //                        body: body);
+        //}
+        _rabbitMQService.PublishMessage(order, "orders");
        
         return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateOrder(int id, OrderUpdateDTO updateDTO)
     {
@@ -86,7 +90,7 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteOrder(int id)
     {
@@ -99,7 +103,7 @@ public class OrderController : ControllerBase
         return Ok("Delete successfully");
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpPut("CancelOrder/{id}")]
     public async Task<ActionResult> CancelOrder(int id)
     {

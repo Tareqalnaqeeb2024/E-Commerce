@@ -8,8 +8,8 @@ namespace E_CommerceDataBusiness.Interfaces.ExternalInterface
 {
     public interface IRedisService
     {
-        Task SetOtpAsync(string email, string otp, TimeSpan expiration);
-        Task<string> GetOtpAsync(string email);
-        Task RemoveOtpAsync(string email);
+        Task SetAsync<T>(string key, T value, TimeSpan? expiration = null);
+        Task<T?> GetAsync<T>(string key);
+        Task RemoveAsync(string key);
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 
@@ -13,27 +14,29 @@ namespace E_CommerceDataBusiness.Services.ExternalServices
     {
         private readonly IDatabase _database;
 
-        public IConnectionMultiplexer Redis { get; }
+        
 
         public RedisService(IConnectionMultiplexer redis)
         {
             _database = redis.GetDatabase();
-            Redis = redis;
+           
         }
 
-        public async Task SetOtpAsync(string email, string otp, TimeSpan expiration)
+        public async Task SetAsync<T>(string key, T value, TimeSpan? expiration = null)
         {
-            await _database.StringSetAsync(email, otp, expiration);
+            var json = JsonSerializer.Serialize(value);
+            await _database.StringSetAsync(key, json, expiration);
         }
 
-        public async Task<string> GetOtpAsync(string email)
+        public async Task<T?> GetAsync<T>(string key)
         {
-            return await _database.StringGetAsync(email);
+            var json = await _database.StringGetAsync(key);
+            return json.IsNullOrEmpty ? default : JsonSerializer.Deserialize<T>(json);
         }
 
-        public async Task RemoveOtpAsync(string email)
+        public async Task RemoveAsync(string key)
         {
-            await _database.KeyDeleteAsync(email);
+            await _database.KeyDeleteAsync(key);
         }
     }
 }

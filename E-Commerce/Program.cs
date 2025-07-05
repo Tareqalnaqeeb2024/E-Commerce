@@ -21,7 +21,7 @@ using StackExchange.Redis;
 using E_CommerceDataBusiness.Basic;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using E_CommerceDataBusiness.Services.ExternalServices;
-using E_Commerce.Hubs;
+
 using E_CommerceDataBusiness.Hubs;
 
 
@@ -109,7 +109,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-//app.MapHub<NotificationHub>("/notificationHub");
+app.MapHub<NotificationHub>("/notificationHub");
 
 
 app.UseHttpsRedirection();

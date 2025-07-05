@@ -26,4 +26,8 @@
     <ProjectReference Include="..\E-CommerceDataBusiness\E-CommerceDataBusiness.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hubs\" />
+  </ItemGroup>
+
 </Project>

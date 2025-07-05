@@ -39,7 +39,7 @@ namespace E_CommerceDataBusiness.Services
                 throw new Exception("Email not found");
 
             var otp = new Random().Next(100000, 999999).ToString();
-            await _redisService.SetOtpAsync(forgetPasswordDto.Email, otp, TimeSpan.FromMinutes(10));
+            await _redisService.SetAsync(forgetPasswordDto.Email, otp, TimeSpan.FromMinutes(10));
             await _emailService.SendEmailAsync(forgetPasswordDto.Email, "Reset OTP", $"Your OTP is: {otp}");
             return "OTP sent successfully";
         }
@@ -156,13 +156,13 @@ namespace E_CommerceDataBusiness.Services
                 throw new ArgumentException("User not found", nameof(verifyCodeDto.Email));
 
     
-            var storedOtp = await _redisService.GetOtpAsync(verifyCodeDto.Email);
+            var storedOtp  = await _redisService.GetAsync<VerfiyCodeDto>(verifyCodeDto.Email);
 
-            if (string.IsNullOrEmpty(storedOtp))
+            if (storedOtp == null)
                 throw new ArgumentException("OTP expired or not found", nameof(verifyCodeDto.Email));
 
          
-            if (storedOtp != verifyCodeDto.CodeOTP)
+            if (storedOtp.CodeOTP != verifyCodeDto.CodeOTP)
                 throw new ArgumentException("Invalid OTP", nameof(verifyCodeDto.CodeOTP));
 
             

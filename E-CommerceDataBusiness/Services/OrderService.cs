@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataBusiness.Services
 {
-    // E_Commerce.Business/Services/OrderService.cs
+  
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
@@ -25,22 +25,38 @@ namespace E_CommerceDataBusiness.Services
         private readonly IHubContext<ProductHub> _hubContext;
         private readonly IEmailService _emailService;
         private readonly IUserRepository  _userRepository;
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
+        private readonly IRedisService _redisCache;
+        private const string KeyPrefix = "order:";
 
         public OrderService(IOrderRepository orderRepository, IMapper mapper , IProductRepository productRepository , IHubContext<ProductHub> hubContext ,
-             IEmailService emailService , IUserRepository userRepository)
+             IEmailService emailService ,IRedisService redisService  ,IUserRepository userRepository , IHubContext<NotificationHub> notificationHubContext)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _productRepository = productRepository;
             _hubContext = hubContext;
             _emailService = emailService;
+            _redisCache = redisService;
             _userRepository = userRepository;
+            _notificationHubContext = notificationHubContext;
         }
 
         public async Task<IEnumerable<OrderDTO>> GetAllOrdersAsync()
         {
+            string cachkey = $"{KeyPrefix}all";
+            var cachorder = await _redisCache.GetAsync<List<OrderDTO>>(cachkey);
+
+            if(cachorder != null)
+            {
+                return cachorder;
+            }
             var orders = await _orderRepository.GetAllWithDetailsAsync();
-            return _mapper.Map<List<OrderDTO>>(orders);
+            var result =  _mapper.Map<List<OrderDTO>>(orders);
+
+            await _redisCache.SetAsync(cachkey, result,TimeSpan.FromMinutes(10));
+
+            return result;
         }
 
         public async Task<IEnumerable<OrderDTO>> GetUserOrdersAsync(string userId)
@@ -85,6 +101,9 @@ namespace E_CommerceDataBusiness.Services
             UserDTO user = await _userRepository.GetUserByIdAsync(userId);
 
           await   _emailService.SendEmailAsync(user.Email," // Created New Order //" ,$"Hello {user.UserName} Your Order with Id {createdOrder.OrderId} has Created with Panding Staust");
+            await _notificationHubContext.Clients.All.SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {createdOrder.User.UserName} ");
+            await _notificationHubContext.Clients.Group("Admin").SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {createdOrder.User.UserName} ");
+
             return _mapper.Map<OrderDTO>(createdOrder);
         }
 
