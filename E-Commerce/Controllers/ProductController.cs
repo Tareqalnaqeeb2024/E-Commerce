@@ -57,7 +57,7 @@ public class ProductController : ControllerBase
         return CreatedAtAction("GetProduct", new { id = product.ProductId }, product);
     }
 
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateProduct(int id, [FromForm] ProductUpdateDTO updateDTO)
     {

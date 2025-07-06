@@ -24,11 +24,14 @@ using E_CommerceDataBusiness.Services.ExternalServices;
 
 using E_CommerceDataBusiness.Hubs;
 
+using E_CommerceDataBusiness.Validator;
+using FluentValidation;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddValidatorsFromAssembly(typeof(ForgetPasswordDtoValidator).Assembly);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -89,7 +92,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5501") // Or .WithOrigins("http://127.0.0.1:5500/")
+        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5501" , "http://127.0.0.1:5500") // Or .WithOrigins("http://127.0.0.1:5500/")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();
@@ -109,9 +112,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.MapHub<NotificationHub>("/notificationHub");
-
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting(); // ÌÃ» √‰ ÌﬂÊ‰ √Ê·«
@@ -120,6 +120,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // «·¬‰ Ì„ﬂ‰  ⁄ÌÌ‰ «· hubs Ê«· controllers
+app.MapHub<NotificationHub>("/notificationHub");
 app.MapHub<ProductHub>("/productHub");
 app.MapControllers();
 

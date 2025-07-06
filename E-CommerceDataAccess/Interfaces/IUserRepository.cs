@@ -17,6 +17,7 @@ namespace E_CommerceDataAccess.Interfaces
         Task<bool> UpdateUserAsync(UserDTO user);
         Task<bool> DeleteUserAsync(string id);
         Task<bool> UserExistsAsync(string username);
-      
+        Task<DashboardStatsDto> GetDashboardStatsAsync();
+
     }
 }

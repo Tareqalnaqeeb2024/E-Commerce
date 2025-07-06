@@ -11,21 +11,33 @@ public class ProductService : IProductService
     private readonly ICategoryRepository _categoryRepository;
     private readonly IMapper _mapper;
     private readonly IFileStorageService _fileStorageService;
+    private readonly IRedisService _redisCache;
+    private const string KeyPrefix = "product:";
 
     public ProductService(
         IProductRepository productRepository,
         ICategoryRepository categoryRepository,
         IMapper mapper,
-        IFileStorageService fileStorageService)
+        IFileStorageService fileStorageService,
+        IRedisService redisService)
     {
         _productRepository = productRepository;
         _categoryRepository = categoryRepository;
         _mapper = mapper;
         _fileStorageService = fileStorageService;
+        _redisCache = redisService;
     }
 
     public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
     {
+         string cacheKey = $"{KeyPrefix}all";
+
+        var cachedProducts = await _redisCache.GetAsync<IEnumerable<ProductDTO>>(cacheKey);
+        if (cachedProducts != null)
+        {
+            return cachedProducts;
+        }
+
         var products = await _productRepository.GetAllWithCategoryAsync();
         var productsDto = _mapper.Map<List<ProductDTO>>(products);
 
@@ -34,11 +46,20 @@ public class ProductService : IProductService
             product.ImageUrl = _fileStorageService.GenerateFileUrl(product.ImageUrl);
         }
 
+        await _redisCache.SetAsync(cacheKey, productsDto, TimeSpan.FromMinutes(30));
+
         return productsDto;
     }
 
     public async Task<ProductDTO> GetProductByIdAsync(int id)
     {
+        string cacheKey = $"{KeyPrefix}{id}";
+
+        var cachedProduct = await _redisCache.GetAsync<ProductDTO>(cacheKey);
+        if (cachedProduct != null)
+        {
+            return cachedProduct;
+        }
         var product = await _productRepository.GetByIdWithCategoryAsync(id);
         if (product == null) throw new KeyNotFoundException("Product not found");
 
@@ -58,6 +79,8 @@ public class ProductService : IProductService
         {
             productDto.ImageBase64 = null;
         }
+
+        await _redisCache.SetAsync(cacheKey, productDto, TimeSpan.FromMinutes(30));
 
         return productDto;
     }
