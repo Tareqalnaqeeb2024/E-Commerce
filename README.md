@@ -2,25 +2,33 @@
 This is a modern e-commerce API built with ASP.NET Core, featuring robust architecture with layered services, real-time capabilities, and scalable infrastructure. The solution includes user management, product catalog, order processing, cart functionality, and real-time notifications.
 
  ## Features
- - User registeration and account management.
- - Product listing and categorization by Category or Brand.
- - Orders management.
- - Cart and Shopping functionality.
- -  Checkout .
+ - RESTful API with JWT Authentication
+ - Real-time notifications via SignalR (NotificationHub, ProductHub)
+ - Modular Architecture (Repositories, Services, DTOs, AutoMapper)
+ - Order Processing with RabbitMQ (pub/sub)
+ - Caching using Redis
+ - Email Integration (SMTP) for user account workflows
    
 # # Technologies
-- ASP .NET core 8 WebApi.
-- AspNetCore.Identity: for authentication and authorization.
-- EF core as ORM.
-- SQL Server as DBMS.
-- JWT: as token-based authentication.
-- Automapper:  For object-object mapping.
+- Backend: ASP.NET Core 6+
+- Database: SQL Server (Entity Framework Core)
+- Auth: JWT + Identity
+- Messaging: RabbitMQ
+- Real-time: SignalR
+- Caching: Redis
 - DTOs: data transfer between layers.
-- Clean architecture.
+- Validation: FluentValidation
 
 ## Architecture
 The system follows Clean Architecture, separating concerns into distinct layers:
 - **API Layer**: Handles API requests
 - **Data Business Layer**: Business logic and Services
 - **Data Access Layer**: Data persistence,Core entities
-   
+   ## Services
+  Service	Description
+- ProductService	Manage products & inventory
+- OrderService	Handle orders & payments
+-  CartService	User shopping cart operations
+- UserService	User account management
+- EmailService	Send transactional emails
+
