@@ -24,11 +24,11 @@ The system follows Clean Architecture, separating concerns into distinct layers:
 - **API Layer**: Handles API requests
 - **Data Business Layer**: Business logic and Services
 - **Data Access Layer**: Data persistence,Core entities
-   📦 Services
-Service	Description
-ProductService	Manage products & inventory
-OrderService	Handle orders & payments
-CartService	User shopping cart operations
-UserService	User account management
-EmailService	Send transactional emails
+   ## Services
+  Service	Description
+- ProductService	Manage products & inventory
+- OrderService	Handle orders & payments
+-  CartService	User shopping cart operations
+- UserService	User account management
+- EmailService	Send transactional emails
 
