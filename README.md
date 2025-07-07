@@ -26,8 +26,8 @@ The system follows Clean Architecture, separating concerns into distinct layers:
 - **Data Access Layer**: Data persistence,Core entities
    ## Services
   Service	Description
-- ProductService	Manage products & inventory
-- OrderService	Handle orders & payments
+- ProductService	Manage products & Categories
+- OrderService	Handle orders 
 -  CartService	User shopping cart operations
 - UserService	User account management
 - EmailService	Send transactional emails
