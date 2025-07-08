@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataBusiness.Interfaces
 {
-    public interface ICartService : ICartSRepository
+    public interface ICartService 
     {
 
         Task<CartDTO> GetCartAsync(string UserId);

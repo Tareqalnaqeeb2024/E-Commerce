@@ -64,5 +64,10 @@ namespace E_CommerceDataAccess.Repositories
         {
             return await _context.Products.AnyAsync(p => p.CategoryId == categoryId);
         }
+
+        public async Task<IEnumerable<Product>> GetAllWithCategoryNameAsync( string categoryname)
+        {
+            return await _context.Products.Include(c => c.Category).Where(n => n.Category.Name  == categoryname).ToListAsync();
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace E_CommerceDataAccess.Repositories
 
         public async Task<IEnumerable<Order>> GetByUserIdWithDetailsAsync(string userId)
         {
+
             return await _context.Orders
                 .Where(o => o.UserId == userId)
                 .Include(o => o.OrderItems)
@@ -53,9 +54,34 @@ namespace E_CommerceDataAccess.Repositories
 
         public async Task<Order> AddAsync(Order order)
         {
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
-            return order;
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+
+            try
+            {
+                foreach (var item in order.OrderItems)
+                {
+                    var product = await _context.Products.FindAsync(item.ProductId);
+                    if (product == null || product.StockQuantity < item.Quantity)
+                        throw new Exception("Insufficient stock.");
+                    product.StockQuantity -= item.Quantity;
+                    _context.Products.Update(product);
+
+                }
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return order;
+
+
+            }
+            catch (Exception)
+            {
+
+                await transaction.RollbackAsync();
+                throw;
+            }
+
+            
         }
 
         public async Task UpdateAsync(Order order)

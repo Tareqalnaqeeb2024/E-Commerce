@@ -126,4 +126,17 @@ public class ProductService : IProductService
     {
         return await _fileStorageService.GetFileAsync(fileName);
     }
+
+    public async Task<IEnumerable<ProductDTO>> GetProductsWithCategoriesAsync(string categoryname)
+    {
+        var products = await _productRepository.GetAllWithCategoryNameAsync(categoryname);
+
+        var produtdto = _mapper.Map<List<ProductDTO>>(products);
+
+        foreach (var product in produtdto)
+        {
+            product.ImageUrl = _fileStorageService.GenerateFileUrl(product.ImageUrl);
+        }
+        return produtdto;
+    }
 }
