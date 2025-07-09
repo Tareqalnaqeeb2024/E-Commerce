@@ -10,7 +10,7 @@ This is a modern e-commerce API built with ASP.NET Core, featuring robust archit
  - Email Integration (SMTP) for user account workflows
    
 # # Technologies
-- Backend: ASP.NET Core 6+
+- Backend: ASP.NET Core 8
 - Database: SQL Server (Entity Framework Core)
 - Auth: JWT + Identity
 - Messaging: RabbitMQ
