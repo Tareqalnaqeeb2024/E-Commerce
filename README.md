@@ -10,7 +10,7 @@ This is a modern e-commerce API built with ASP.NET Core, featuring robust archit
  - Email Integration (SMTP) for user account workflows
    
 # # Technologies
-- Backend: ASP.NET Core 6+
+- Backend: ASP.NET Core 8
 - Database: SQL Server (Entity Framework Core)
 - Auth: JWT + Identity
 - Messaging: RabbitMQ
@@ -26,8 +26,8 @@ The system follows Clean Architecture, separating concerns into distinct layers:
 - **Data Access Layer**: Data persistence,Core entities
    ## Services
   Service	Description
-- ProductService	Manage products & inventory
-- OrderService	Handle orders & payments
+- ProductService	Manage products & Categories
+- OrderService	Handle orders 
 -  CartService	User shopping cart operations
 - UserService	User account management
 - EmailService	Send transactional emails
