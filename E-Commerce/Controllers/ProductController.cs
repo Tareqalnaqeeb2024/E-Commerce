@@ -21,7 +21,7 @@ public class ProductController : ControllerBase
         var products = await _productService.GetAllProductsAsync();
         return Ok(products);
     }
-    [HttpGet("getAllBycategoryname{categoryname}")]
+    [HttpGet("getAllBy{categoryname}")]
     public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByCateogryName(string categoryname)
     {
         var products = await _productService.GetProductsWithCategoriesAsync(categoryname);

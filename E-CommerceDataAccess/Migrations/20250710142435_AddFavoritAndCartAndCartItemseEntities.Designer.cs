@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_CommerceDataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250628220304_FixedFAttributeInCartAndCartItem2")]
-    partial class FixedFAttributeInCartAndCartItem2
+    [Migration("20250710142435_AddFavoritAndCartAndCartItemseEntities")]
+    partial class AddFavoritAndCartAndCartItemseEntities
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,6 +81,21 @@ namespace E_CommerceDataAccess.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("E_CommerceDataAccess.Models.Favorite", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("E_CommerceDataAccess.Models.Order", b =>
@@ -398,12 +413,31 @@ namespace E_CommerceDataAccess.Migrations
                     b.HasOne("E_CommerceDataAccess.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cart");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("E_CommerceDataAccess.Models.Favorite", b =>
+                {
+                    b.HasOne("E_CommerceDataAccess.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_CommerceDataAccess.Models.UserAccount", "User")
+                        .WithMany("Favorites")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("E_CommerceDataAccess.Models.Order", b =>
@@ -520,6 +554,8 @@ namespace E_CommerceDataAccess.Migrations
 
             modelBuilder.Entity("E_CommerceDataAccess.Models.UserAccount", b =>
                 {
+                    b.Navigation("Favorites");
+
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618

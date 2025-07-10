@@ -29,6 +29,13 @@ namespace E_Commerce.MappingProfile
             CreateMap<Order, OrderDTO>();
             CreateMap<OrderCreateDTO, Order>();
 
+            CreateMap<Favorite, FavoriteDTO>()
+               .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.ProductId))
+               .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Product.Name))
+               .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price))
+               .ForMember(dest => dest.ImagePath, opt => opt.MapFrom(src => src.Product.ImageUrl));
+               
+
         }
     }
 }

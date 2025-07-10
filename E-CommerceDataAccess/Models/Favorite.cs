@@ -8,24 +8,19 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Models
 {
-    public class CartItem
+    public class Favorite
     {
-        
-        public int CartItemId { get; set; } 
+       
+       
+        [Required]
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; }  // Must match IdentityUser's key type
+        public UserAccount User { get; set; }
 
-        [ForeignKey(nameof(Cart))]
-        public int CartId { get; set; }
-        public Cart Cart { get; set; }
-
+        [Required]
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
         public Product Product { get; set; }
-        [Range(1, int.MaxValue)]
-        public int Quantity { get; set; }
 
-        [NotMapped]
-        public decimal TotalPrice => Product?.Price * Quantity ?? 0;
-
-      
     }
 }

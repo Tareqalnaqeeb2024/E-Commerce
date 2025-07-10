@@ -18,11 +18,9 @@ namespace E_CommerceDataAccess.Models
         [ForeignKey(nameof(UserAccount))]
         public string UserID { get; set; }
         public UserAccount UserAccount { get; set; }
-        public decimal TotalAmount => CalculatedTotal();
+        [NotMapped]
+        public decimal TotalAmount => Items.Sum(item => item.Product.Price * item.Quantity);
 
-        private decimal CalculatedTotal ()
-        {
-            return Items.Sum( item =>  item.Product.Price * item.Quantity);
-        }
+       
     }
 }

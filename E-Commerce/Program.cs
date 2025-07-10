@@ -52,6 +52,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<ICartSRepository,CartSRepository>();
+builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+
 
 
 // Register services
@@ -67,6 +69,7 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<IFavoriteServices, FavoriteServices>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddSingleton<IEmailService, EmailService>();

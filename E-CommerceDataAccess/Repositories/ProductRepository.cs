@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace E_CommerceDataAccess.Repositories
 {
     // E_Commerce.DataAccess/Repositories/ProductRepository.cs
-    public class ProductRepository : IProductRepository
+    public class ProductRepository :IProductRepository
     {
         private readonly AppDbContext _context;
 
@@ -27,10 +27,12 @@ namespace E_CommerceDataAccess.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _context.Products.FindAsync(id);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.ProductId == id);
+          
+            return product;
         }
 
-        public async Task<Product> GetByIdWithCategoryAsync(int id)
+        public async Task<Product?> GetByIdWithCategoryAsync(int id)
         {
             return await _context.Products
                 .Include(p => p.Category)

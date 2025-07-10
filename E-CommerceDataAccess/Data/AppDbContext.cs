@@ -24,6 +24,7 @@ namespace E_CommerceDataAccess.Data
         public DbSet<OrderItem> Items { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -63,10 +64,32 @@ namespace E_CommerceDataAccess.Data
             builder.Entity<Cart>()
              .HasMany(c => c.Items)
              .WithOne(ci => ci.Cart)
-             .HasForeignKey(ci => ci.CartId);
+             .HasForeignKey(ci => ci.CartId)
+             .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<CartItem>()
                .HasKey(ci => new { ci.CartId, ci.ProductId });
+            builder.Entity<CartItem>()
+                  .HasOne(ci => ci.Product)
+                   .WithMany()
+                   .HasForeignKey(ci => ci.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Favorite>()
+                .HasKey(f => new { f.UserId, f.ProductId });
+
+            builder.Entity<Favorite>()
+             .HasOne(f => f.User)
+    .WithMany(u => u.Favorites)
+            .HasForeignKey(f => f.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Favorite>()
+            .HasOne(f => f.Product)
+            .WithMany() // إذا لم تكن هناك خاصية Products في نموذج Product
+            .HasForeignKey(f => f.ProductId)
+            .OnDelete(DeleteBehavior.Cascade);
+
 
 
         }

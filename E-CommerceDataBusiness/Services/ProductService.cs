@@ -5,7 +5,7 @@ using E_CommerceDataAccess.Models;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 
-public class ProductService : IProductService
+public class ProductService :IProductService
 {
     private readonly IProductRepository _productRepository;
     private readonly ICategoryRepository _categoryRepository;
