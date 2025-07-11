@@ -58,12 +58,14 @@ namespace E_CommerceDataBusiness.Services
 
             if (!reslut)
                 throw new Exception("Invalid credentials");
-           
+           var roles  = await _userManager.GetRolesAsync(user);
             var token = new TokenDTO
             {
                 Token = await _tokenService.GenerateTokenAsync(user),
                 Email = user.Email,
-                UserID = user.Id              
+                UserID = user.Id,
+                Role = roles.ToList()
+
             };
             var decodedToken = Uri.UnescapeDataString(token.Token);
             Console.WriteLine(Uri.UnescapeDataString(decodedToken));

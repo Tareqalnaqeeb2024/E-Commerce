@@ -17,5 +17,8 @@ namespace E_CommerceDataAccess.Interfaces
         Task DeleteAsync(int id);
         Task<bool> AnyByCategoryIdAsync(int categoryId);
         Task<IEnumerable<Product>> GetAllWithCategoryNameAsync(string categoryname);
+
+        Task<IEnumerable<Product>> SearchByNameOrDescriptionAsync(string keyword);
+        Task<IEnumerable<Product>> GetAvailableProductsAsync();
     }
 }

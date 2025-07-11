@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Repositories
 {
-    public class CartSRepository : ICartSRepository
+    public class CartRepository : ICartRepository
         
     {
         private readonly AppDbContext  _context;
 
-        public CartSRepository(AppDbContext context)
+        public CartRepository(AppDbContext context)
         {
             _context = context;
         }

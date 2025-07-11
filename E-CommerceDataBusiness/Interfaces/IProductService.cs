@@ -16,5 +16,9 @@ namespace E_CommerceDataBusiness.Interfaces
         Task DeleteProductAsync(int id);
         Task<(Stream FileStream, string ContentType)> DownloadImageAsync(string fileName);
         Task<IEnumerable<ProductDTO>> GetProductsWithCategoriesAsync(string cateforyname);
+
+        Task<IEnumerable<ProductDTO>> GetAvailableProductsAsync();
+        Task<IEnumerable<ProductDTO>> SearchProductsAsync(string keyword);
+        Task UpdateProductPriceAsync(int productId, decimal NewPrice);
     }
 }

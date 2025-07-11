@@ -35,6 +35,7 @@ public class TokenDTO
 
     public string UserID { get; set; }
     public string Token { get; set; }
+   public  List <string> Role { get; set; }
 }
 
 public class VerfiyCodeDto

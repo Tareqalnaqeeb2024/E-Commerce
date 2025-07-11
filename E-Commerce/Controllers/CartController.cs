@@ -59,7 +59,7 @@ namespace E_Commerce.Controllers
         {
             var userId = User?.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
-            var reslut =  _cartService.IncrementItemQuantityAsnyc(productId, userId);
+            var reslut =   _cartService.IncrementItemQuantityAsnyc(productId, userId);
             return Ok(reslut);
         }
 

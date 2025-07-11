@@ -71,5 +71,22 @@ namespace E_CommerceDataAccess.Repositories
         {
             return await _context.Products.Include(c => c.Category).Where(n => n.Category.Name  == categoryname).ToListAsync();
         }
+        public async Task<IEnumerable<Product>> SearchByNameOrDescriptionAsync(string keyword)
+        {
+            return await _context.Products
+                .Include(p => p.Category)
+                .Where(p =>
+                    p.Name.Contains(keyword) ||
+                    p.Description.Contains(keyword))
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Product>> GetAvailableProductsAsync()
+        {
+            return await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.StockQuantity >= 1)
+                .ToListAsync();
+        }
+
     }
 }

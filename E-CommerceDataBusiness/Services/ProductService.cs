@@ -139,4 +139,42 @@ public class ProductService :IProductService
         }
         return produtdto;
     }
+
+    public async Task<IEnumerable<ProductDTO>> GetAvailableProductsAsync()
+    {
+        var products = await _productRepository.GetAvailableProductsAsync();
+        var productDtos = _mapper.Map<List<ProductDTO>>(products);
+
+        foreach (var product in productDtos)
+        {
+            product.ImageUrl = _fileStorageService.GenerateFileUrl(product.ImageUrl);
+        }
+
+        return productDtos;
+    }
+
+    public async Task<IEnumerable<ProductDTO>> SearchProductsAsync(string keyword)
+    {
+        var products = await _productRepository.SearchByNameOrDescriptionAsync(keyword);
+        var productDtos = _mapper.Map<List<ProductDTO>>(products);
+
+        foreach (var product in productDtos)
+        {
+            product.ImageUrl = _fileStorageService.GenerateFileUrl(product.ImageUrl);
+        }
+
+        return productDtos;
+    }
+
+    public async Task UpdateProductPriceAsync(int id, decimal newPrice)
+    {
+        var product = await _productRepository.GetByIdAsync(id);
+        if (product == null) throw new KeyNotFoundException("Product not found");
+
+        product.Price = newPrice;
+        await _productRepository.UpdateAsync(product);
+    }
+
+
+
 }

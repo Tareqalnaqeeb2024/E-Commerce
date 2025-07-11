@@ -18,10 +18,10 @@ namespace E_Commerce.Controllers
         [HttpGet("GetAllFavorite")]
         public async Task<IActionResult> GetUserFavorites()
         {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //if (userId == null) return Unauthorized();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
 
-            var favorites = await _favoriteServices.GetUserFavorites("27c2d1ae-0769-4d72-b3a0-f888668ed807");
+            var favorites = await _favoriteServices.GetUserFavorites(userId);
             if (favorites == null) return Ok("No Product found");
             return Ok(favorites);
         }
@@ -29,13 +29,13 @@ namespace E_Commerce.Controllers
         [HttpDelete("{productId}")]
         public async Task<IActionResult> RemoveFavorite([FromRoute] int productId)
         {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //if (userId == null) return Unauthorized();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
 
             try
             {
 
-                await _favoriteServices.RemoveFromFavorite("27c2d1ae-0769-4d72-b3a0-f888668ed807", productId);
+                await _favoriteServices.RemoveFromFavorite(userId, productId);
                 return Ok(new { message = "Product removed from favorites." });
             }
             catch (Exception)
@@ -47,10 +47,10 @@ namespace E_Commerce.Controllers
         [HttpPost("{productId}")]
         public async Task<IActionResult> AddFavorite([FromRoute] int productId)
         {
-            //var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //if (userId == null) return Unauthorized();
-            
-            await _favoriteServices.AddToFavorite("27c2d1ae-0769-4d72-b3a0-f888668ed807", productId);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) return Unauthorized();
+
+            await _favoriteServices.AddToFavorite(userId, productId);
             return Ok("Product added to favorites.");
         }
 

@@ -11,9 +11,9 @@ namespace E_CommerceDataBusiness.Services
 {
     public class CartService : ICartService
     {
-        private readonly ICartSRepository _cartSRepository;
+        private readonly ICartRepository _cartSRepository;
 
-        public CartService( ICartSRepository cartSRepository)
+        public CartService( ICartRepository cartSRepository)
         {
             _cartSRepository = cartSRepository;
         }

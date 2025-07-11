@@ -92,4 +92,24 @@ public class ProductController : ControllerBase
             return NotFound();
         }
     }
+
+    [HttpGet("AllAvialable")]
+    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllAvialableProducts()
+    {
+        var reslut =  await _productService.GetAvailableProductsAsync();
+
+        return Ok(reslut);
+    }
+    [HttpGet("GetProductsBy{Key}")]
+    public async Task<ActionResult<IEnumerable<ProductDTO>>> SearchProducts(string Key)
+    {
+        var reslut = await _productService.SearchProductsAsync(Key);
+        return Ok(reslut);
+    }
+    [HttpPut("{productId}/price")]
+    public async Task<ActionResult> UpdateProductPrice([FromRoute] int productId,[FromBody] decimal newPrice)
+    {
+        await  _productService.UpdateProductPriceAsync(productId, newPrice);
+        return Ok("Update Price Successfuly");
+    }
 }

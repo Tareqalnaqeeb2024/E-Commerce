@@ -26,6 +26,7 @@ using E_CommerceDataBusiness.Hubs;
 
 using E_CommerceDataBusiness.Validator;
 using FluentValidation;
+using FluentValidation.AspNetCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +52,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-builder.Services.AddScoped<ICartSRepository,CartSRepository>();
+builder.Services.AddScoped<ICartRepository,CartRepository>();
 builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 
 
