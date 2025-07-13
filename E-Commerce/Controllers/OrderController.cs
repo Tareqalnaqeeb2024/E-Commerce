@@ -55,7 +55,10 @@ public class OrderController : ControllerBase
     public async Task<ActionResult<OrderDTO>> CreateOrder(OrderCreateDTO orderCreate)
     {
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized();
         var order = await _orderService.CreateOrderAsync(orderCreate, userId);
+
       
         _rabbitMQService.PublishMessage(order, "orders");
        

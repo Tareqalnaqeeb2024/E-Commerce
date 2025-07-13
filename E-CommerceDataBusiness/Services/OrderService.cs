@@ -100,9 +100,9 @@ namespace E_CommerceDataBusiness.Services
 
             UserDTO user = await _userRepository.GetUserByIdAsync(userId);
 
-          await   _emailService.SendEmailAsync(user.Email," // Created New Order //" ,$"Hello {user.UserName} Your Order with Id {createdOrder.OrderId} has Created with Panding Staust");
-            await _notificationHubContext.Clients.All.SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {createdOrder.User.UserName} ");
-            await _notificationHubContext.Clients.Group("Admin").SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {createdOrder.User.UserName} ");
+          //await   _emailService.SendEmailAsync(user.Email," // Created New Order //" ,$"Hello {user.UserName} Your Order with Id {createdOrder.OrderId} has Created with Panding Staust");
+            await _notificationHubContext.Clients.All.SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {user.UserName} ");
+            await _notificationHubContext.Clients.Group("Admin").SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {user.UserName} ");
 
             return _mapper.Map<OrderDTO>(createdOrder);
         }

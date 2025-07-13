@@ -68,6 +68,7 @@ namespace E_CommerceDataAccess.Repositories
                     _context.Products.Update(product);
 
                 }
+                _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
                 return order;

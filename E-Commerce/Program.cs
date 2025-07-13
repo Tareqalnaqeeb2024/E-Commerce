@@ -27,6 +27,7 @@ using E_CommerceDataBusiness.Hubs;
 using E_CommerceDataBusiness.Validator;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using E_Commerce.Midlleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -116,13 +117,14 @@ if (app.Environment.IsDevelopment())
 }
 
 
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseMiddleware<RateLimitingMiddleware>();
 app.UseRouting(); // нћ» √д няжд √жб«р
 app.UseCors("AllowAll"); // Ћг CORS
 app.UseAuthentication();
 app.UseAuthorization();
-
 // «б¬д нгяд  Џннд «б hubs ж«б controllers
 app.MapHub<NotificationHub>("/notificationHub");
 app.MapHub<ProductHub>("/productHub");

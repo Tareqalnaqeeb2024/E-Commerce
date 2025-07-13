@@ -36,14 +36,18 @@ namespace E_CommerceDataBusiness.Services.ExternalServices
             new Claim(ClaimTypes.NameIdentifier, user.Id),
              new Claim("userId", user.Id),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-              new Claim(ClaimTypes.Role, "Admin")
-
+              
 
             };
 
             var roles = await _userManager.GetRolesAsync(user);
 
-            Claims.Add(new Claim(ClaimTypes.Role, roles.ToString()));
+            foreach (var role in roles)
+            {
+                
+            Claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+            }
+
 
            
             //second Get SigningCredentials

@@ -13,6 +13,8 @@ using E_CommerceDataAccess.Data;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Interfaces;
+using E_CommerceDataBusiness.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace E_CommerceDataBusiness.BackgroundServices
 {
@@ -57,6 +59,11 @@ namespace E_CommerceDataBusiness.BackgroundServices
                         using (var scope = _serviceProvider.CreateScope())
                         {
                             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                            var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
+                            var hub = scope.ServiceProvider.GetRequiredService<IHubContext<NotificationHub>>();
+                            var hubStock = scope.ServiceProvider.GetRequiredService<IHubContext<ProductHub>>();
+
+
                             var existingOrder = await dbContext.Orders.FindAsync(order.OrderId);
                             if (existingOrder != null)
                             {
@@ -66,7 +73,9 @@ namespace E_CommerceDataBusiness.BackgroundServices
                                 var user = await dbContext.Users.FindAsync(existingOrder.UserId);
                                 await _emailService.SendEmailAsync(user.Email, " // Created New Order //", $"Hello {user.UserName} Your Order with Id {existingOrder.OrderId} has  Complated Staust");
 
-
+                                //var message = $"OrderId: {order.OrderId} from user {user.UserName}";
+                                //await hub.Clients.All.SendAsync("ReceiveNewOrder", message);
+                                
                                 //_logger.LogInformation($"Processed Order: {order.OrderId}");
                             }
                         }
