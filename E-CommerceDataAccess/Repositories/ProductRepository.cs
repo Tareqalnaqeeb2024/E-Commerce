@@ -1,4 +1,7 @@
 ﻿using E_CommerceDataAccess.Data;
+using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
@@ -86,6 +89,57 @@ namespace E_CommerceDataAccess.Repositories
                 .Include(p => p.Category)
                 .Where(p => p.StockQuantity >= 1)
                 .ToListAsync();
+        }
+
+     
+        public async Task<PagedResult<Product>> GetPagedProductsAsync(ProductPagination parameters)
+        {
+            var query = _context.Products
+                .Include(p => p.Category)
+                .AsQueryable();
+
+            // Apply filters
+            if (!string.IsNullOrEmpty(parameters.CategoryName))
+            {
+                query = query.Where(p => p.Category.Name == parameters.CategoryName);
+            }
+
+            if (parameters.MinPrice.HasValue)
+            {
+                query = query.Where(p => p.Price >= parameters.MinPrice);
+            }
+
+            if (parameters.MaxPrice.HasValue)
+            {
+                query = query.Where(p => p.Price <= parameters.MaxPrice);
+            }
+
+            // Apply sorting
+            query = parameters.SortBy?.ToLower() switch
+            {
+                "name" => parameters.SortDescending
+                    ? query.OrderByDescending(p => p.Name)
+                    : query.OrderBy(p => p.Name),
+                "price" => parameters.SortDescending
+                    ? query.OrderByDescending(p => p.Price)
+                    : query.OrderBy(p => p.Price),
+                _ => query.OrderBy(p => p.Name) // Default sorting
+            };
+
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+                .Take(parameters.PageSize)
+                .ToListAsync();
+
+            return new PagedResult<Product>
+            {
+                Items = items,
+                TotalCount = totalCount,
+                PageNumber = parameters.PageNumber,
+                PageSize = parameters.PageSize
+            };
         }
 
     }

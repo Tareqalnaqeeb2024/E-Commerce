@@ -1,4 +1,6 @@
 ﻿using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -10,14 +12,23 @@ namespace E_CommerceDataAccess.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserDTO> GetUserByIdAsync(string id);
-        Task<UserDTO> GetUserByUsernameAsync(string username);
-        Task<IEnumerable<UserDTO>> GetAllUsersAsync();
-        Task<bool> CreateUserAsync(UserDTO user, string Role);
-        Task<bool> UpdateUserAsync(UserDTO user);
-        Task<bool> DeleteUserAsync(string id);
-        Task<bool> UserExistsAsync(string username);
+        Task<UserAccount> GetByIdAsync(string id);
+        Task<UserAccount> GetByUsernameAsync(string username);
+        Task<IEnumerable<UserAccount>> GetAllAsync();
+        Task<bool> CreateAsync(UserAccount user, string password, string role);
+        Task<bool> UpdateAsync(UserAccount user);
+        Task<bool> DeleteAsync(string id);
+        Task<bool> ExistsAsync(string username);
+
+        // Extended functionality
+        Task<IEnumerable<string>> GetUserRolesAsync(string userId);
+        Task<bool> UpdateUserRolesAsync(string userId, IEnumerable<string> roles);
+
+        // Dashboard
         Task<DashboardStatsDto> GetDashboardStatsAsync();
 
+        // Pagination
+        Task<PagedResult<UserAccount>> GetPagedUsersAsync(UserPaginationParams parameters);
     }
 }
+

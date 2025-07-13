@@ -1,4 +1,6 @@
 ﻿using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,7 @@ namespace E_CommerceDataBusiness.Interfaces
         Task UpdateOrderAsync(int id, OrderUpdateDTO updateDTO);
         Task DeleteOrderAsync(int id);
         Task CancelOrderAsync(int id, string userId, bool isAdmin);
+
+        Task<PagedResult<OrderDTO>> GetOrdersPagedAsync(OrderPagination parameters, string? userId = null);
     }
 }

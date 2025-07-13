@@ -23,7 +23,10 @@ namespace E_Commerce.MappingProfile
             CreateMap<OrderItemCreateDTO, OrderItem>();
             CreateMap<OrderItemUpdateDTO, OrderItem>();
 
-          
+            CreateMap<UserAccount, UserDTO>()
+                  .ForMember(dest => dest.userId, opt => opt.MapFrom(src => src.Id))
+                  .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.PhoneNumber))
+                  .ForMember(dest => dest.Roles, opt => opt.Ignore());
 
 
             CreateMap<Order, OrderDTO>();

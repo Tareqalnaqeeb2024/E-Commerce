@@ -1,5 +1,7 @@
 ﻿
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataBusiness.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -111,5 +113,29 @@ public class ProductController : ControllerBase
     {
         await  _productService.UpdateProductPriceAsync(productId, newPrice);
         return Ok("Update Price Successfuly");
+    }
+
+  
+    [HttpGet("paged")]
+    public async Task<ActionResult<PagedResult<ProductDTO>>> GetProductsPaged(
+        [FromQuery] ProductPagination parameters)
+    {
+        try
+        {
+            // Validate parameters
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _productService.GetProductsPagedAsync(parameters);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            
+           
+            return StatusCode(500, "An error occurred while processing your request");
+        }
     }
 }

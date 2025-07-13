@@ -1,6 +1,9 @@
 ﻿using E_Commerce.Business.Services;
 using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
+using E_CommerceDataBusiness.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,28 +17,52 @@ namespace E_Commerce.Controllers
     [Authorize(Roles = "Admin")]
     public class UserAccountController : ControllerBase
     {
-        private readonly UserService _userService;
-        private readonly AppDbContext _context;
+        private readonly IUserService _userService;
+        
 
-        public UserAccountController(UserService userService, AppDbContext context)
+        public UserAccountController(IUserService userService )
         {
             _userService = userService;
-            _context = context;
+           
             
         }
 
         [HttpGet("AllUsers")]
         public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
         {
-            var users = await _userService.GetAllUsers();
+            var users = await _userService.GetAllUsersAsync();
             return Ok(users);
         }
+        [HttpGet("paged")]
+        public async Task<ActionResult<PagedResult<UserDTO>>> GetPagedUsers(
+       [FromQuery] UserPaginationParams parameters)
+        {
+            var result = await _userService.GetPagedUsersAsync(parameters);
+            return Ok(result);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserDTO>> GetUser(string id)
+        {
+            var user = await _userService.GetUserByIdAsync(id);
+            if (user == null) return NotFound();
+            return Ok(user);
+        }
+        [HttpPost]
+        public async Task<ActionResult<UserDTO>> CreateUser([FromBody] UserDTO userDTO)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-        
+            var created = await _userService.CreateUserAsync(userDTO,"User");
+            if (!created) return BadRequest("User creation failed");
+
+            var newUser = await _userService.GetUserByUsernameAsync(userDTO.UserName);
+            return CreatedAtAction(nameof(GetUser), new { id = newUser.userId }, newUser);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(string id)
         {
-            var result = await _userService.DeleteUser(id);
+            var result = await _userService.DeleteUserAsync(id);
             if (!result) return NotFound();
 
             return Ok("User deleted successfully");
@@ -48,7 +75,7 @@ namespace E_Commerce.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             userDTO.userId = Id;
-            var result = await _userService.UpdateUser(userDTO);
+            var result = await _userService.UpdateUserAsync(userDTO);
             if (!result) return NotFound("User not found.");
 
             return Ok("User updated successfully.");

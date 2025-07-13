@@ -1,4 +1,7 @@
-﻿using E_CommerceDataAccess.Models;
+﻿using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
+using E_CommerceDataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +23,7 @@ namespace E_CommerceDataAccess.Interfaces
 
         Task<IEnumerable<Product>> SearchByNameOrDescriptionAsync(string keyword);
         Task<IEnumerable<Product>> GetAvailableProductsAsync();
+
+        Task<PagedResult<Product>> GetPagedProductsAsync(ProductPagination parameters);
     }
 }

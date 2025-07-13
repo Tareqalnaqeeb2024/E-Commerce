@@ -1,5 +1,7 @@
 ﻿using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using Microsoft.AspNetCore.Identity;
@@ -10,88 +12,41 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Repositories
 {
+    
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<UserAccount> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly AppDbContext _context;
 
-        public UserRepository(UserManager<UserAccount> userManager,
-                            RoleManager<IdentityRole> roleManager,
-                            AppDbContext context)
+        public UserRepository(
+            UserManager<UserAccount> userManager,
+            RoleManager<IdentityRole> roleManager,
+            AppDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _context = context;
         }
 
-        public async Task<UserDTO> GetUserByIdAsync(string id)
+        public async Task<UserAccount> GetByIdAsync(string id)
         {
-            var user = await _userManager.FindByIdAsync(id);
-            if (user == null) return null;
-
-            var roles = await _userManager.GetRolesAsync(user);
-            return new UserDTO
-            {
-                userId = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                Phone = user.PhoneNumber,
-                Roles = roles.ToString()
-            };
+            return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task<UserDTO> GetUserByUsernameAsync(string username)
+        public async Task<UserAccount> GetByUsernameAsync(string username)
         {
-            var user = await _userManager.FindByNameAsync(username);
-            if (user == null) return null;
-
-            var roles = await _userManager.GetRolesAsync(user);
-            return new UserDTO
-            {
-                userId = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                Phone = user.PhoneNumber,
-                Roles = roles.ToString()
-            };
+            return await _userManager.FindByNameAsync(username);
         }
 
-        public async Task<IEnumerable<UserDTO>> GetAllUsersAsync()
+        public async Task<IEnumerable<UserAccount>> GetAllAsync()
         {
-            var users = await _userManager.Users.ToListAsync();
-            var userDtos = new List<UserDTO>();
-
-            foreach (var user in users)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-             
-
-                userDtos.Add(new UserDTO
-                {
-                    userId = user.Id,
-                    Phone = user.PhoneNumber,
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    Password = user.PasswordHash,
-                    Roles = roles.ToString()
-                });
-            }
-
-            return userDtos;
+            return await _userManager.Users.ToListAsync();
         }
 
-        public async Task<bool> CreateUserAsync(UserDTO userDto, string role = null)
+        public async Task<bool> CreateAsync(UserAccount user, string password, string role)
         {
-            var userAccount = new UserAccount
-            {
-                UserName = userDto.UserName,
-                Email = userDto.Email,
-                PhoneNumber = userDto.Phone,
-                
-            };
-
-            var result = await _userManager.CreateAsync(userAccount, userDto.Password);
+            var result = await _userManager.CreateAsync(user, password);
 
             if (result.Succeeded && !string.IsNullOrEmpty(role))
             {
@@ -99,40 +54,19 @@ namespace E_CommerceDataAccess.Repositories
                 {
                     await _roleManager.CreateAsync(new IdentityRole(role));
                 }
-
-                await _userManager.AddToRoleAsync(userAccount, role);
-                return true;
+                await _userManager.AddToRoleAsync(user, role);
             }
 
             return result.Succeeded;
         }
 
-        public async Task<bool> UpdateUserAsync(UserDTO userDto)
+        public async Task<bool> UpdateAsync(UserAccount user)
         {
-            var user = await _userManager.FindByIdAsync(userDto.userId);
-            if (user == null) return false;
-
-            user.UserName = userDto.UserName;
-            user.Email = userDto.Email;
-            user.PhoneNumber = userDto.Phone;
-
             var result = await _userManager.UpdateAsync(user);
-            if (!result.Succeeded) return false;
-
-            //if (userDto.Roles != null && userDto.Roles.Any())
-            //{
-            //    var currentRoles = await _userManager.GetRolesAsync(user);
-            //    var rolesToAdd = userDto.Roles.Except(currentRoles);
-            //    var rolesToRemove = currentRoles.Except(userDto.Roles);
-
-            //    await _userManager.RemoveFromRolesAsync(user, rolesToRemove);
-            //    await _userManager.AddToRolesAsync(user, rolesToAdd);
-            //}
-
-            return true;
+            return result.Succeeded;
         }
 
-        public async Task<bool> DeleteUserAsync(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
             if (user == null) return false;
@@ -141,9 +75,33 @@ namespace E_CommerceDataAccess.Repositories
             return result.Succeeded;
         }
 
-        public async Task<bool> UserExistsAsync(string username)
+        public async Task<bool> ExistsAsync(string username)
         {
             return await _userManager.FindByNameAsync(username) != null;
+        }
+
+        public async Task<IEnumerable<string>> GetUserRolesAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return Enumerable.Empty<string>();
+
+            return await _userManager.GetRolesAsync(user);
+        }
+
+        public async Task<bool> UpdateUserRolesAsync(string userId, IEnumerable<string> roles)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return false;
+
+            var currentRoles = await _userManager.GetRolesAsync(user);
+
+            // Remove old roles
+            await _userManager.RemoveFromRolesAsync(user, currentRoles);
+
+            // Add new roles
+            var result = await _userManager.AddToRolesAsync(user, roles);
+
+            return result.Succeeded;
         }
 
         public async Task<DashboardStatsDto> GetDashboardStatsAsync()
@@ -151,30 +109,76 @@ namespace E_CommerceDataAccess.Repositories
             var totalOrders = await _context.Orders.CountAsync();
             var totalRevenue = await _context.Orders.SumAsync(o => o.TotalAmount);
             var totalProducts = await _context.Products.CountAsync();
-            var totalUsers = await _context.Users.CountAsync();
+            var totalUsers = await _userManager.Users.CountAsync();
 
             var recentOrders = await _context.Orders
-                      .OrderByDescending(o => o.OrderDate)
-                      .Take(5)
-                      .Select(o => new OrderDTO
-                      {
-                          OrderId = o.OrderId,
-                          UserId = o.UserId,
-                          OrderDate = o.OrderDate,
-                          TotalAmount = o.TotalAmount,
-                          Status = o.Status
-                      }).ToListAsync();
-            var dashboardStats = new DashboardStatsDto
+                .OrderByDescending(o => o.OrderDate)
+                .Take(5)
+                .ToListAsync();
+
+            return new DashboardStatsDto
             {
                 TotalOrders = totalOrders,
                 TotalRevenue = totalRevenue,
                 TotalProducts = totalProducts,
                 TotalUsers = totalUsers,
-                RecentOrders = recentOrders
+                RecentOrders = recentOrders.Select(o => new OrderDTO
+                {
+                    OrderId = o.OrderId,
+                    UserId = o.UserId,
+                    OrderDate = o.OrderDate,
+                    TotalAmount = o.TotalAmount,
+                    Status = o.Status
+                }).ToList()
+            };
+        }
 
+        public async Task<PagedResult<UserAccount>> GetPagedUsersAsync(UserPaginationParams parameters)
+        {
+            var query = _userManager.Users.AsQueryable();
+
+            // Apply search filter
+            if (!string.IsNullOrEmpty(parameters.SearchTerm))
+            {
+                query = query.Where(u =>
+                    u.UserName.Contains(parameters.SearchTerm) ||
+                    u.Email.Contains(parameters.SearchTerm));
+            }
+
+            // Apply role filter
+            if (!string.IsNullOrEmpty(parameters.RoleFilter))
+            {
+                var usersInRole = await _userManager.GetUsersInRoleAsync(parameters.RoleFilter);
+                var userIds = usersInRole.Select(u => u.Id);
+                query = query.Where(u => userIds.Contains(u.Id));
+            }
+
+            // Apply sorting
+            query = parameters.SortBy?.ToLower() switch
+            {
+                "email" => parameters.SortDescending
+                    ? query.OrderByDescending(u => u.Email)
+                    : query.OrderBy(u => u.Email),
+                "date" => parameters.SortDescending
+                    
+                    ? query.OrderByDescending(u => u.UserName)
+                    : query.OrderBy(u => u.UserName)
             };
 
-            return dashboardStats;
+            var totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+                .Take(parameters.PageSize)
+                .ToListAsync();
+
+            return new PagedResult<UserAccount>
+            {
+                Items = items,
+                TotalCount = totalCount,
+                PageNumber = parameters.PageNumber,
+                PageSize = parameters.PageSize
+            };
         }
     }
 }

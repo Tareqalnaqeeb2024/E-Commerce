@@ -1,4 +1,7 @@
-﻿using E_CommerceDataAccess.Models;
+﻿using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
+using E_CommerceDataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +19,7 @@ namespace E_CommerceDataAccess.Interfaces
         Task<Order> AddAsync(Order order);
         Task UpdateAsync(Order order);
         Task DeleteAsync(int id);
+
+        Task<PagedResult<Order>> GetPagedOrdersAsync(OrderPagination parameters, string? userId = null);
     }
 }

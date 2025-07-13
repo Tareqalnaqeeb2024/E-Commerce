@@ -1,5 +1,7 @@
 ﻿// E_Commerce.API/Controllers/OrderController.cs
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Microsoft.AspNetCore.Authorization;
@@ -120,5 +122,35 @@ public class OrderController : ControllerBase
         {
             return NotFound("Order not found.");
         }
+
+
+    }
+    [Authorize(Roles = "Admin")]
+    [HttpGet("paged")]
+    public async Task<ActionResult<PagedResult<OrderDTO>>> GetOrdersPaged(
+     [FromQuery] OrderPagination parameters)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var result = await _orderService.GetOrdersPagedAsync(parameters);
+        return Ok(result);
+    }
+
+    [Authorize]
+    [HttpGet("user/paged")]
+    public async Task<ActionResult<PagedResult<OrderDTO>>> GetUserOrdersPaged(
+        [FromQuery] OrderPagination parameters)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var result = await _orderService.GetOrdersPagedAsync(parameters, userId);
+        return Ok(result);
     }
 }

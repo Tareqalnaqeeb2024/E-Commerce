@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
+using Newtonsoft.Json;
 
 public class ProductService :IProductService
 {
@@ -175,6 +178,37 @@ public class ProductService :IProductService
         await _productRepository.UpdateAsync(product);
     }
 
+    public async Task<PagedResult<ProductDTO>> GetProductsPagedAsync(ProductPagination parameters)
+    {
+        string cacheKey = $"{KeyPrefix}paged:{JsonConvert.SerializeObject(parameters)}";
+        var cachedResult = await _redisCache.GetAsync<PagedResult<ProductDTO>>(cacheKey);
+
+        if (cachedResult != null)
+        {
+            return cachedResult;
+        }
+
+        var pagedResult = await _productRepository.GetPagedProductsAsync(parameters);
+        var productDtos = _mapper.Map<List<ProductDTO>>(pagedResult.Items);
+
+        // Process image URLs
+        foreach (var product in productDtos)
+        {
+            product.ImageUrl = _fileStorageService.GenerateFileUrl(product.ImageUrl);
+        }
+
+        var result = new PagedResult<ProductDTO>
+        {
+            Items = productDtos,
+            TotalCount = pagedResult.TotalCount,
+            PageNumber = pagedResult.PageNumber,
+            PageSize = pagedResult.PageSize
+        };
+
+        await _redisCache.SetAsync(cacheKey, result, TimeSpan.FromMinutes(30));
+
+        return result;
+    }
 
 
 }

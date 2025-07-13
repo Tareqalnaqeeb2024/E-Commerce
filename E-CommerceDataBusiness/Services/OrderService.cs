@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.DTO.Common;
+using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using E_CommerceDataBusiness.Hubs;
@@ -8,6 +10,7 @@ using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +28,20 @@ namespace E_CommerceDataBusiness.Services
         private readonly IHubContext<ProductHub> _hubContext;
         private readonly IEmailService _emailService;
         private readonly IUserRepository  _userRepository;
+        private readonly IUserService  _userService;
         private readonly IHubContext<NotificationHub> _notificationHubContext;
         private readonly IRedisService _redisCache;
         private const string KeyPrefix = "order:";
 
         public OrderService(IOrderRepository orderRepository, IMapper mapper , IProductRepository productRepository , IHubContext<ProductHub> hubContext ,
-             IEmailService emailService ,IRedisService redisService  ,IUserRepository userRepository , IHubContext<NotificationHub> notificationHubContext)
+             IEmailService emailService , IUserService userService ,IRedisService redisService  ,IUserRepository userRepository , IHubContext<NotificationHub> notificationHubContext)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _productRepository = productRepository;
             _hubContext = hubContext;
             _emailService = emailService;
+            _userService = userService;
             _redisCache = redisService;
             _userRepository = userRepository;
             _notificationHubContext = notificationHubContext;
@@ -98,7 +103,7 @@ namespace E_CommerceDataBusiness.Services
 
             var createdOrder = await _orderRepository.AddAsync(order);
 
-            UserDTO user = await _userRepository.GetUserByIdAsync(userId);
+            UserDTO user = await _userService.GetUserByIdAsync(userId);
 
           //await   _emailService.SendEmailAsync(user.Email," // Created New Order //" ,$"Hello {user.UserName} Your Order with Id {createdOrder.OrderId} has Created with Panding Staust");
             await _notificationHubContext.Clients.All.SendAsync("ReceiveNewOrder", $"OderId : {createdOrder.OrderId} from user {user.UserName} ");
@@ -132,6 +137,33 @@ namespace E_CommerceDataBusiness.Services
 
             order.Status = "Canceled";
             await _orderRepository.UpdateAsync(order);
+        }
+
+        
+        public async Task<PagedResult<OrderDTO>> GetOrdersPagedAsync(OrderPagination parameters, string? userId = null)
+        {
+            string cacheKey = $"{KeyPrefix}paged:{userId}:{JsonConvert.SerializeObject(parameters)}";
+            var cachedResult = await _redisCache.GetAsync<PagedResult<OrderDTO>>(cacheKey);
+
+            if (cachedResult != null)
+            {
+                return cachedResult;
+            }
+
+            var pagedResult = await _orderRepository.GetPagedOrdersAsync(parameters, userId);
+            var orderDtos = _mapper.Map<List<OrderDTO>>(pagedResult.Items);
+
+            var result = new PagedResult<OrderDTO>
+            {
+                Items = orderDtos,
+                TotalCount = pagedResult.TotalCount,
+                PageNumber = pagedResult.PageNumber,
+                PageSize = pagedResult.PageSize
+            };
+
+            await _redisCache.SetAsync(cacheKey, result, TimeSpan.FromMinutes(10));
+
+            return result;
         }
     }
 }
