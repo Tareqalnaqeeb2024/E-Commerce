@@ -27,12 +27,7 @@ namespace E_Commerce.Controllers
             
         }
 
-        [HttpGet("AllUsers")]
-        public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
-        {
-            var users = await _userService.GetAllUsersAsync();
-            return Ok(users);
-        }
+      
         [HttpGet("paged")]
         public async Task<ActionResult<PagedResult<UserDTO>>> GetPagedUsers(
        [FromQuery] UserPaginationParams parameters)

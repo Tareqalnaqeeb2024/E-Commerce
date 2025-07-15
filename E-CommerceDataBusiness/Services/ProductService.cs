@@ -97,6 +97,9 @@ public class ProductService :IProductService
         var productDto = _mapper.Map<ProductDTO>(createdProduct);
         productDto.ImageUrl = _fileStorageService.GenerateFileUrl(productDto.ImageUrl);
 
+        await _redisCache.RemoveAsync($"{KeyPrefix}all");
+        await _redisCache.RemoveAsync($"{KeyPrefix}paged:*");
+
         return productDto;
     }
 
@@ -114,6 +117,10 @@ public class ProductService :IProductService
         }
 
         await _productRepository.UpdateAsync(product);
+
+        await _redisCache.RemoveAsync($"{KeyPrefix}{id}");
+        await _redisCache.RemoveAsync($"{KeyPrefix}all");
+        await _redisCache.RemoveAsync($"{KeyPrefix}paged:*");
     }
 
     public async Task DeleteProductAsync(int id)
@@ -123,6 +130,9 @@ public class ProductService :IProductService
 
         await _fileStorageService.DeleteFileAsync(product.ImageUrl);
         await _productRepository.DeleteAsync(id);
+         await _redisCache.RemoveAsync($"{KeyPrefix}{id}");
+    await _redisCache.RemoveAsync($"{KeyPrefix}all");
+    await _redisCache.RemoveAsync($"{KeyPrefix}paged:*");
     }
 
     public async Task<(Stream FileStream, string ContentType)> DownloadImageAsync(string fileName)

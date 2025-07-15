@@ -17,12 +17,6 @@ public class ProductController : ControllerBase
         _productService = productService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
-    {
-        var products = await _productService.GetAllProductsAsync();
-        return Ok(products);
-    }
     [HttpGet("getAllBy{categoryname}")]
     public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProductsByCateogryName(string categoryname)
     {
@@ -95,13 +89,7 @@ public class ProductController : ControllerBase
         }
     }
 
-    [HttpGet("AllAvialable")]
-    public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllAvialableProducts()
-    {
-        var reslut =  await _productService.GetAvailableProductsAsync();
-
-        return Ok(reslut);
-    }
+   
     [HttpGet("GetProductsBy{Key}")]
     public async Task<ActionResult<IEnumerable<ProductDTO>>> SearchProducts(string Key)
     {

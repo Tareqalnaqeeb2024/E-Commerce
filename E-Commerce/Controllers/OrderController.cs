@@ -24,14 +24,7 @@ public class OrderController : ControllerBase
         _rabbitMQService = rabbitMQService;
     }
 
-    [Authorize(Roles = "Admin")]
-    [HttpGet("AllOrders")]
-    public async Task<ActionResult<IEnumerable<OrderDTO>>> GetAllOrders()
-    {
-        var orders = await _orderService.GetAllOrdersAsync();
-        return Ok(orders);
-    }
-
+  
     [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()

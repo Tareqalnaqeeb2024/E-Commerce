@@ -13,8 +13,8 @@ namespace E_CommerceDataBusiness.Services.ExternalServices
     public class RedisService : IRedisService
     {
         private readonly IDatabase _database;
+        private const string PagedProductKeysSet = "product:paged:keys";
 
-        
 
         public RedisService(IConnectionMultiplexer redis)
         {
