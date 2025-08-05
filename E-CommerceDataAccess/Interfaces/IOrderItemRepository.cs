@@ -1,4 +1,5 @@
-﻿using E_CommerceDataAccess.Models;
+﻿using E_CommerceDataAccess.BaseRepositry;
+using E_CommerceDataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Interfaces
 {
-    public interface IOrderItemRepository
+    public interface IOrderItemRepository : IBaseRepository<OrderItem>
     {
-        Task<OrderItem> GetByIdAsync(int id);
+        //Task<OrderItem> GetByIdAsync(int id);
         Task<OrderItem> GetByIdWithProductAsync(int id);
-        Task<IEnumerable<OrderItem>> GetAllAsync();
-        Task<OrderItem> AddAsync(OrderItem orderItem);
-        Task UpdateAsync(OrderItem orderItem);
-        Task DeleteAsync(int id);
+        //Task<IEnumerable<OrderItem>> GetAllAsync();
+        //Task<OrderItem> AddAsync(OrderItem orderItem);
+        //Task UpdateAsync(OrderItem orderItem);
+        //Task DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
     }
 }

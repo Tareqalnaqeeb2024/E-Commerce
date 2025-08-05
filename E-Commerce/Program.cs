@@ -28,6 +28,7 @@ using E_CommerceDataBusiness.Validator;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using E_Commerce.Midlleware;
+using E_CommerceDataAccess.UnitOfWork;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -72,6 +73,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICartService,CartService>();
 builder.Services.AddScoped<IFavoriteServices, FavoriteServices>();
+builder.Services.AddScoped<IUnitOfwork,UnitOfWork>();
 
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("MailSettings"));
 builder.Services.AddSingleton<IEmailService, EmailService>();

@@ -1,4 +1,5 @@
-﻿using E_CommerceDataAccess.Data;
+﻿using E_CommerceDataAccess.BaseRepositry;
+using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
@@ -14,19 +15,19 @@ using System.Threading.Tasks;
 namespace E_CommerceDataAccess.Repositories
 {
     
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
         private readonly AppDbContext _context;
 
-        public OrderRepository(AppDbContext context)
+        public OrderRepository(AppDbContext context) :base(context)
         {
             _context = context;
         }
 
-        public async Task<Order> GetByIdAsync(int id)
-        {
-            return await _context.Orders.FindAsync(id);
-        }
+        //public async Task<Order> GetByIdAsync(int id)
+        //{
+        //    return await _context.Orders.FindAsync(id);
+        //}
 
         public async Task<Order> GetByIdWithDetailsAsync(int id)
         {
@@ -36,14 +37,14 @@ namespace E_CommerceDataAccess.Repositories
                 .FirstOrDefaultAsync(o => o.OrderId == id);
         }
 
-        public async Task<IEnumerable<Order>> GetAllWithDetailsAsync()
-        {
-            return await _context.Orders
-                .Include(u => u.User)
-                .Include(o => o.OrderItems)
-                .ThenInclude(o => o.Product)
-                .ToListAsync();
-        }
+        //public async Task<IEnumerable<Order>> GetAllWithDetailsAsync()
+        //{
+        //    return await _context.Orders
+        //        .Include(u => u.User)
+        //        .Include(o => o.OrderItems)
+        //        .ThenInclude(o => o.Product)
+        //        .ToListAsync();
+        //}
 
         public async Task<IEnumerable<Order>> GetByUserIdWithDetailsAsync(string userId)
         {
@@ -55,56 +56,56 @@ namespace E_CommerceDataAccess.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Order> AddAsync(Order order)
-        {
-            using var transaction = await _context.Database.BeginTransactionAsync();
+        //public async Task<Order> AddAsync(Order order)
+        //{
+        //    using var transaction = await _context.Database.BeginTransactionAsync();
 
 
-            try
-            {
-                foreach (var item in order.OrderItems)
-                {
-                    var product = await _context.Products.FindAsync(item.ProductId);
-                    if (product == null || product.StockQuantity < item.Quantity)
-                        throw new Exception("Insufficient stock.");
-                    product.StockQuantity -= item.Quantity;
-                    _context.Products.Update(product);
+        //    try
+        //    {
+        //        foreach (var item in order.OrderItems)
+        //        {
+        //            var product = await _context.Products.FindAsync(item.ProductId);
+        //            if (product == null || product.StockQuantity < item.Quantity)
+        //                throw new Exception("Insufficient stock.");
+        //            product.StockQuantity -= item.Quantity;
+        //            _context.Products.Update(product);
 
-                }
-                _context.Orders.Add(order);
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
-                return order;
+        //        }
+        //        _context.Orders.Add(order);
+        //        await _context.SaveChangesAsync();
+        //        await transaction.CommitAsync();
+        //        return order;
 
 
-            }
-            catch (Exception)
-            {
+        //    }
+        //    catch (Exception)
+        //    {
 
-                await transaction.RollbackAsync();
-                throw;
-            }
+        //        await transaction.RollbackAsync();
+        //        throw;
+        //    }
 
-            
-        }
 
-        public async Task UpdateAsync(Order order)
-        {
-            _context.Orders.Update(order);
-            await _context.SaveChangesAsync();
-        }
+        //}
 
-        public async Task DeleteAsync(int id)
-        {
-            var order = await GetByIdAsync(id);
-            if (order != null)
-            {
-                _context.Orders.Remove(order);
-                await _context.SaveChangesAsync();
-            }
-        }
+        //public async Task UpdateAsync(Order order)
+        //{
+        //    _context.Orders.Update(order);
+        //    await _context.SaveChangesAsync();
+        //}
 
-      
+        //public async Task DeleteAsync(int id)
+        //{
+        //    var order = await GetByIdAsync(id);
+        //    if (order != null)
+        //    {
+        //        _context.Orders.Remove(order);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //}
+
+
         public async Task<PagedResult<Order>> GetPagedOrdersAsync(OrderPagination parameters, string? userId = null)
         {
             var query = _context.Orders

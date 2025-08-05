@@ -2,6 +2,7 @@
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataAccess.UnitOfWork;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using System;
@@ -15,22 +16,19 @@ namespace E_CommerceDataBusiness.Services
    
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
         private readonly IRedisService _redisCache;
         private const string CacheKeyPrefix = "category:";
+        private readonly IUnitOfwork _unitOfwork;
 
         public CategoryService(
-            ICategoryRepository categoryRepository,
-            IProductRepository productRepository,
             IMapper mapper,
-            IRedisService redisService)
+            IRedisService redisService , IUnitOfwork unitOfwork)
         {
-            _categoryRepository = categoryRepository;
-            _productRepository = productRepository;
+           
             _mapper = mapper;
             _redisCache = redisService;
+            _unitOfwork = unitOfwork;
         }
 
         public async Task<IEnumerable<CategoryDTO>> GetAllCategoriesAsync()
@@ -41,7 +39,8 @@ namespace E_CommerceDataBusiness.Services
             {
                 return cachedCategories;
             }
-            var categoriesDto = await _categoryRepository.GetAllAsync();
+            var categoriesDto = await _unitOfwork.categories.GetAllAsync();
+
             await _redisCache.SetAsync(cacheKey, categoriesDto, TimeSpan.FromMinutes(30));
 
             return _mapper.Map<IEnumerable<CategoryDTO>>(categoriesDto);
@@ -57,7 +56,9 @@ namespace E_CommerceDataBusiness.Services
             {
                 return cachedCategory;
             }
-            var categoryDto = await _categoryRepository.GetByIdAsync(id);
+            
+            var categoryDto = await _unitOfwork.categories.GetByIdAsync(id);
+
             if (categoryDto == null) throw new KeyNotFoundException("Category not found");
 
             await _redisCache.SetAsync(cacheKey, categoryDto, TimeSpan.FromMinutes(30));
@@ -68,25 +69,32 @@ namespace E_CommerceDataBusiness.Services
         public async Task<CategoryDTO> CreateCategoryAsync(CategoryCreateDTO createDTO)
         {
             var category = _mapper.Map<Category>(createDTO);
-            var createdCategory = await _categoryRepository.AddAsync(category);
-            return _mapper.Map<CategoryDTO>(createdCategory);
+           await _unitOfwork.categories.AddAsync(category);
+            await _unitOfwork.CompleteAsync();
+
+            return _mapper.Map<CategoryDTO>(category);
         }
 
         public async Task UpdateCategoryAsync(int id, CategoryUpdateDTO updateDTO)
         {
-            var category = await _categoryRepository.GetByIdAsync(id);
+            var category = await _unitOfwork.categories.GetByIdAsync(id);
             if (category == null) throw new KeyNotFoundException("Category not found");
 
             _mapper.Map(updateDTO, category);
-            await _categoryRepository.UpdateAsync(category);
+           _unitOfwork.categories.Update(category);
+            await _unitOfwork.CompleteAsync();
+
+            await _redisCache.RemoveAsync($"{CacheKeyPrefix}{id}");
+
         }
 
         public async Task DeleteCategoryAsync(int id)
         {
-            bool hasProducts = await _productRepository.AnyByCategoryIdAsync(id);
+            bool hasProducts = await _unitOfwork.products.AnyByCategoryIdAsync(id);
             if (hasProducts) throw new InvalidOperationException("Cannot delete Category with Related Products");
-
-            await _categoryRepository.DeleteAsync(id);
+            var category = await _unitOfwork.categories.GetByIdAsync(id);
+            _unitOfwork.categories.Delete(category);
+            await _unitOfwork.CompleteAsync();
         }
     }
 }

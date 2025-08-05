@@ -1,4 +1,5 @@
-﻿using E_CommerceDataAccess.DTO;
+﻿using E_CommerceDataAccess.BaseRepositry;
+using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Models;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Interfaces
 {
-    public interface IProductRepository
+    public interface IProductRepository : IBaseRepository<Product>
     {
         Task<IEnumerable<Product>> GetAllWithCategoryAsync();
-        Task<Product> GetByIdAsync(int id);
+        //Task<Product> GetByIdAsync(int id);
         Task<Product> GetByIdWithCategoryAsync(int id);
-        Task<Product> AddAsync(Product product);
-        Task UpdateAsync(Product product);
-        Task DeleteAsync(int id);
+        //Task<Product> AddAsync(Product product);
+        //Task UpdateAsync(Product product);
+        //Task DeleteAsync(int id);
         Task<bool> AnyByCategoryIdAsync(int categoryId);
         Task<IEnumerable<Product>> GetAllWithCategoryNameAsync(string categoryname);
 

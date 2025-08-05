@@ -4,31 +4,32 @@ using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataAccess.UnitOfWork;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Newtonsoft.Json;
 
 public class ProductService :IProductService
 {
-    private readonly IProductRepository _productRepository;
-    private readonly ICategoryRepository _categoryRepository;
+    private readonly IUnitOfwork _unitOfwork;
     private readonly IMapper _mapper;
     private readonly IFileStorageService _fileStorageService;
     private readonly IRedisService _redisCache;
     private const string KeyPrefix = "product:";
+    
 
     public ProductService(
-        IProductRepository productRepository,
-        ICategoryRepository categoryRepository,
+ 
         IMapper mapper,
         IFileStorageService fileStorageService,
-        IRedisService redisService)
+        IRedisService redisService,
+        IUnitOfwork unitOfwork)
     {
-        _productRepository = productRepository;
-        _categoryRepository = categoryRepository;
+    
         _mapper = mapper;
         _fileStorageService = fileStorageService;
         _redisCache = redisService;
+        _unitOfwork = unitOfwork;
     }
 
     public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
@@ -41,7 +42,8 @@ public class ProductService :IProductService
             return cachedProducts;
         }
 
-        var products = await _productRepository.GetAllWithCategoryAsync();
+        var products = await _unitOfwork.products.GetAllAsync();
+
         var productsDto = _mapper.Map<List<ProductDTO>>(products);
 
         foreach (var product in productsDto)
@@ -63,7 +65,7 @@ public class ProductService :IProductService
         {
             return cachedProduct;
         }
-        var product = await _productRepository.GetByIdWithCategoryAsync(id);
+        var product = await _unitOfwork.products.GetByIdWithCategoryAsync(id);
         if (product == null) throw new KeyNotFoundException("Product not found");
 
         var productDto = _mapper.Map<ProductDTO>(product);
@@ -93,8 +95,11 @@ public class ProductService :IProductService
         var product = _mapper.Map<Product>(createDTO);
         product.ImageUrl = await _fileStorageService.SaveFileAsync(createDTO.ImageFile);
 
-        var createdProduct = await _productRepository.AddAsync(product);
-        var productDto = _mapper.Map<ProductDTO>(createdProduct);
+        //var createdProduct = await _productRepository.AddAsync(product);
+        await _unitOfwork.products.AddAsync(product);
+         _unitOfwork.Complete();
+
+        var productDto = _mapper.Map<ProductDTO>(product);
         productDto.ImageUrl = _fileStorageService.GenerateFileUrl(productDto.ImageUrl);
 
         await _redisCache.RemoveAsync($"{KeyPrefix}all");
@@ -105,7 +110,8 @@ public class ProductService :IProductService
 
     public async Task UpdateProductAsync(int id, ProductUpdateDTO updateDTO)
     {
-        var product = await _productRepository.GetByIdAsync(id);
+        var product = await _unitOfwork.products.GetByIdAsync(id);
+
         if (product == null) throw new KeyNotFoundException("Product not found");
 
         _mapper.Map(updateDTO, product);
@@ -116,7 +122,8 @@ public class ProductService :IProductService
             product.ImageUrl = await _fileStorageService.SaveFileAsync(updateDTO.ImageFile);
         }
 
-        await _productRepository.UpdateAsync(product);
+         _unitOfwork.products.Update(product);
+        _unitOfwork.Complete();
 
         await _redisCache.RemoveAsync($"{KeyPrefix}{id}");
         await _redisCache.RemoveAsync($"{KeyPrefix}all");
@@ -125,11 +132,12 @@ public class ProductService :IProductService
 
     public async Task DeleteProductAsync(int id)
     {
-        var product = await _productRepository.GetByIdAsync(id);
+        var product = await _unitOfwork.products.GetByIdAsync(id);
         if (product == null) throw new KeyNotFoundException("Product not found");
 
         await _fileStorageService.DeleteFileAsync(product.ImageUrl);
-        await _productRepository.DeleteAsync(id);
+        _unitOfwork.products.Delete(product);
+        await _unitOfwork.CompleteAsync();
          await _redisCache.RemoveAsync($"{KeyPrefix}{id}");
     await _redisCache.RemoveAsync($"{KeyPrefix}all");
     await _redisCache.RemoveAsync($"{KeyPrefix}paged:*");
@@ -142,7 +150,7 @@ public class ProductService :IProductService
 
     public async Task<IEnumerable<ProductDTO>> GetProductsWithCategoriesAsync(string categoryname)
     {
-        var products = await _productRepository.GetAllWithCategoryNameAsync(categoryname);
+        var products = await _unitOfwork.products.GetAllWithCategoryNameAsync(categoryname);
 
         var produtdto = _mapper.Map<List<ProductDTO>>(products);
 
@@ -155,7 +163,7 @@ public class ProductService :IProductService
 
     public async Task<IEnumerable<ProductDTO>> GetAvailableProductsAsync()
     {
-        var products = await _productRepository.GetAvailableProductsAsync();
+        var products = await _unitOfwork.products.GetAvailableProductsAsync();
         var productDtos = _mapper.Map<List<ProductDTO>>(products);
 
         foreach (var product in productDtos)
@@ -168,7 +176,7 @@ public class ProductService :IProductService
 
     public async Task<IEnumerable<ProductDTO>> SearchProductsAsync(string keyword)
     {
-        var products = await _productRepository.SearchByNameOrDescriptionAsync(keyword);
+        var products = await _unitOfwork.products.SearchByNameOrDescriptionAsync(keyword);
         var productDtos = _mapper.Map<List<ProductDTO>>(products);
 
         foreach (var product in productDtos)
@@ -181,11 +189,12 @@ public class ProductService :IProductService
 
     public async Task UpdateProductPriceAsync(int id, decimal newPrice)
     {
-        var product = await _productRepository.GetByIdAsync(id);
+        var product = await _unitOfwork.products.GetByIdAsync(id);
         if (product == null) throw new KeyNotFoundException("Product not found");
 
         product.Price = newPrice;
-        await _productRepository.UpdateAsync(product);
+        _unitOfwork.products.Update(product);
+        _unitOfwork.Complete();
     }
 
     public async Task<PagedResult<ProductDTO>> GetProductsPagedAsync(ProductPagination parameters)
@@ -198,7 +207,7 @@ public class ProductService :IProductService
             return cachedResult;
         }
 
-        var pagedResult = await _productRepository.GetPagedProductsAsync(parameters);
+        var pagedResult = await _unitOfwork.products.GetPagedProductsAsync(parameters);
         var productDtos = _mapper.Map<List<ProductDTO>>(pagedResult.Items);
 
         // Process image URLs

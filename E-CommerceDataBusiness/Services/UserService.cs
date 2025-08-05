@@ -4,6 +4,7 @@ using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataAccess.UnitOfWork;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +16,8 @@ namespace E_Commerce.Business.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository _userRepository;
+        
+        private readonly IUnitOfwork _unitOfwork;
         private readonly IEmailService _emailService;
         private readonly IRedisService _redisCache;
         private readonly IMapper _mapper;
@@ -24,12 +26,12 @@ namespace E_Commerce.Business.Services
         private const string DashboardCacheKey = "dashboard:stats";
 
         public UserService(
-            IUserRepository userRepository,
+            IUnitOfwork unitOfwork,
             IEmailService emailService,
             IRedisService redisCache,
             IMapper mapper)
         {
-            _userRepository = userRepository;
+            _unitOfwork = unitOfwork;
             _emailService = emailService;
             _redisCache = redisCache;
             _mapper = mapper;
@@ -41,10 +43,10 @@ namespace E_Commerce.Business.Services
             var cachedUser = await _redisCache.GetAsync<UserDTO>(cacheKey);
             if (cachedUser != null) return cachedUser;
 
-            var user = await _userRepository.GetByIdAsync(id);
+            var user = await _unitOfwork.users.GetByIdAsync(id);
             if (user == null) return null;
 
-            var roles = await _userRepository.GetUserRolesAsync(id);
+            var roles = await _unitOfwork.users.GetUserRolesAsync(id);
             var userDto = _mapper.Map<UserDTO>(user);
             userDto.Roles = string.Join(",", roles);
 
@@ -54,10 +56,10 @@ namespace E_Commerce.Business.Services
 
         public async Task<UserDTO> GetUserByUsernameAsync(string username)
         {
-            var user = await _userRepository.GetByUsernameAsync(username);
+            var user = await _unitOfwork.users.GetByUsernameAsync(username);
             if (user == null) return null;
 
-            var roles = await _userRepository.GetUserRolesAsync(user.Id);
+            var roles = await _unitOfwork.users.GetUserRolesAsync(user.Id);
             var userDto = _mapper.Map<UserDTO>(user);
             userDto.Roles = string.Join(",", roles);
 
@@ -69,12 +71,12 @@ namespace E_Commerce.Business.Services
             var cachedUsers = await _redisCache.GetAsync<IEnumerable<UserDTO>>(AllUsersCacheKey);
             if (cachedUsers != null) return cachedUsers;
 
-            var users = await _userRepository.GetAllAsync();
+            var users = await       _unitOfwork.users.GetAllAsync();
             var userDtos = new List<UserDTO>();
 
             foreach (var user in users)
             {
-                var roles = await _userRepository.GetUserRolesAsync(user.Id);
+                var roles = await _unitOfwork.users.GetUserRolesAsync(user.Id);
                 userDtos.Add(new UserDTO
                 {
                     userId = user.Id,
@@ -91,11 +93,11 @@ namespace E_Commerce.Business.Services
 
         public async Task<bool> CreateUserAsync(UserDTO userDto, string role)
         {
-            if (await _userRepository.ExistsAsync(userDto.UserName))
+            if (await _unitOfwork.users.ExistsAsync(userDto.UserName))
                 return false;
 
             var userAccount = _mapper.Map<UserAccount>(userDto);
-            var created = await _userRepository.CreateAsync(userAccount, userDto.Password, role);
+            var created = await _unitOfwork.users.CreateAsync(userAccount, userDto.Password, role);
 
             if (created)
             {
@@ -113,16 +115,16 @@ namespace E_Commerce.Business.Services
 
         public async Task<bool> UpdateUserAsync(UserDTO userDto)
         {
-            var userAccount = await _userRepository.GetByIdAsync(userDto.userId);
+            var userAccount = await _unitOfwork.users.GetByIdAsync(userDto.userId);
             if (userAccount == null) return false;
 
             _mapper.Map(userDto, userAccount);
-            var updated = await _userRepository.UpdateAsync(userAccount);
+            var updated = await _unitOfwork.users.UpdateAsync(userAccount);
 
             if (updated && !string.IsNullOrEmpty(userDto.Roles))
             {
                 var roles = userDto.Roles.Split(',').ToList();
-                await _userRepository.UpdateUserRolesAsync(userDto.userId, roles);
+                await _unitOfwork.users.UpdateUserRolesAsync(userDto.userId, roles);
             }
 
             if (updated)
@@ -137,7 +139,7 @@ namespace E_Commerce.Business.Services
 
         public async Task<bool> DeleteUserAsync(string id)
         {
-            var deleted = await _userRepository.DeleteAsync(id);
+            var deleted = await _unitOfwork.users.DeleteAsync(id);
             if (deleted)
             {
                 // Clear relevant caches
@@ -150,7 +152,7 @@ namespace E_Commerce.Business.Services
 
         public async Task<bool> UserExistsAsync(string username)
         {
-            return await _userRepository.ExistsAsync(username);
+            return await _unitOfwork.users.ExistsAsync(username);
         }
 
         public async Task<DashboardStatsDto> GetDashboardStatsAsync()
@@ -158,7 +160,7 @@ namespace E_Commerce.Business.Services
             var cachedStats = await _redisCache.GetAsync<DashboardStatsDto>(DashboardCacheKey);
             if (cachedStats != null) return cachedStats;
 
-            var stats = await _userRepository.GetDashboardStatsAsync();
+            var stats = await _unitOfwork.users.GetDashboardStatsAsync();
             await _redisCache.SetAsync(DashboardCacheKey, stats, TimeSpan.FromMinutes(15));
 
             return stats;
@@ -170,12 +172,12 @@ namespace E_Commerce.Business.Services
             var cachedResult = await _redisCache.GetAsync<PagedResult<UserDTO>>(cacheKey);
             if (cachedResult != null) return cachedResult;
 
-            var pagedResult = await _userRepository.GetPagedUsersAsync(parameters);
+            var pagedResult = await _unitOfwork.users.GetPagedUsersAsync(parameters);
             var userDtos = new List<UserDTO>();
 
             foreach (var user in pagedResult.Items)
             {
-                var roles = await _userRepository.GetUserRolesAsync(user.Id);
+                var roles = await _unitOfwork.users.GetUserRolesAsync(user.Id);
                 userDtos.Add(new UserDTO
                 {
                     userId = user.Id,

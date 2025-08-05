@@ -1,4 +1,5 @@
-﻿using E_CommerceDataAccess.DTO;
+﻿using E_CommerceDataAccess.BaseRepositry;
+using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Models;
@@ -10,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Interfaces
 {
-    public interface IOrderRepository
+    public interface IOrderRepository : IBaseRepository<Order>
     {
-        Task<Order> GetByIdAsync(int id);
+        //Task<Order> GetByIdAsync(int id);
         Task<Order> GetByIdWithDetailsAsync(int id);
-        Task<IEnumerable<Order>> GetAllWithDetailsAsync();
+        //Task<IEnumerable<Order>> GetAllWithDetailsAsync();
         Task<IEnumerable<Order>> GetByUserIdWithDetailsAsync(string userId);
-        Task<Order> AddAsync(Order order);
-        Task UpdateAsync(Order order);
-        Task DeleteAsync(int id);
+        //Task<Order> AddAsync(Order order);
+        //Task UpdateAsync(Order order);
+        //Task DeleteAsync(int id);
 
         Task<PagedResult<Order>> GetPagedOrdersAsync(OrderPagination parameters, string? userId = null);
     }

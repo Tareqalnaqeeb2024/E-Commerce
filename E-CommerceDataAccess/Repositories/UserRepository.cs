@@ -1,4 +1,5 @@
-﻿using E_CommerceDataAccess.Data;
+﻿using E_CommerceDataAccess.BaseRepositry;
+using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
@@ -13,20 +14,20 @@ using System.Threading.Tasks;
 namespace E_CommerceDataAccess.Repositories
 {
     
-    public class UserRepository : IUserRepository
+    public class UserRepository :BaseRepository<UserAccount> , IUserRepository
     {
         private readonly UserManager<UserAccount> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly AppDbContext _context;
+        //private readonly AppDbContext _context;
 
         public UserRepository(
             UserManager<UserAccount> userManager,
             RoleManager<IdentityRole> roleManager,
-            AppDbContext context)
+            AppDbContext context) :base (context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            _context = context;
+            //_context = context;
         }
 
         public async Task<UserAccount> GetByIdAsync(string id)
@@ -39,10 +40,10 @@ namespace E_CommerceDataAccess.Repositories
             return await _userManager.FindByNameAsync(username);
         }
 
-        public async Task<IEnumerable<UserAccount>> GetAllAsync()
-        {
-            return await _userManager.Users.ToListAsync();
-        }
+        //public async Task<IEnumerable<UserAccount>> GetAllAsync()
+        //{
+        //    return await _userManager.Users.ToListAsync();
+        //}
 
         public async Task<bool> CreateAsync(UserAccount user, string password, string role)
         {
@@ -159,7 +160,7 @@ namespace E_CommerceDataAccess.Repositories
                 "email" => parameters.SortDescending
                     ? query.OrderByDescending(u => u.Email)
                     : query.OrderBy(u => u.Email),
-                "date" => parameters.SortDescending
+                "username" => parameters.SortDescending
                     
                     ? query.OrderByDescending(u => u.UserName)
                     : query.OrderBy(u => u.UserName)

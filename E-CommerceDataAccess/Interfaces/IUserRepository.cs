@@ -1,4 +1,5 @@
-﻿using E_CommerceDataAccess.DTO;
+﻿using E_CommerceDataAccess.BaseRepositry;
+using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.DTO.Common;
 using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Models;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<UserAccount>
     {
         Task<UserAccount> GetByIdAsync(string id);
         Task<UserAccount> GetByUsernameAsync(string username);
-        Task<IEnumerable<UserAccount>> GetAllAsync();
+        //Task<IEnumerable<UserAccount>> GetAllAsync();
         Task<bool> CreateAsync(UserAccount user, string password, string role);
         Task<bool> UpdateAsync(UserAccount user);
         Task<bool> DeleteAsync(string id);

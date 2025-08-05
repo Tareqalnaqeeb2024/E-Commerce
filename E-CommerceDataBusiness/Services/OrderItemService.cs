@@ -2,6 +2,7 @@
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataAccess.UnitOfWork;
 using E_CommerceDataBusiness.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,17 @@ namespace E_CommerceDataBusiness.Services
 {
     public class OrderItemService : IOrderItemService
     {
-        private readonly IOrderItemRepository _orderItemRepository;
+       
         private readonly IMapper _mapper;
+        private readonly IUnitOfwork _unitOfwork;
 
         public OrderItemService(
-            IOrderItemRepository orderItemRepository,
-            IMapper mapper)
+           
+            IMapper mapper,
+            IUnitOfwork unitOfwork)
         {
-            _orderItemRepository = orderItemRepository;
             _mapper = mapper;
+            _unitOfwork = unitOfwork;
         }
 
         public async Task<OrderItemDTO> GetOrderItemByIdAsync(int id)
@@ -29,7 +32,7 @@ namespace E_CommerceDataBusiness.Services
             if (id <= 0)
                 throw new ArgumentException("ID must be positive");
 
-            var orderItem = await _orderItemRepository.GetByIdWithProductAsync(id);
+            var orderItem = await _unitOfwork.orderItems.GetByIdWithProductAsync(id);
             if (orderItem == null)
                 throw new KeyNotFoundException("Order item not found");
 
@@ -38,15 +41,16 @@ namespace E_CommerceDataBusiness.Services
 
         public async Task<IEnumerable<OrderItemDTO>> GetAllOrderItemsAsync()
         {
-            var orderItems = await _orderItemRepository.GetAllAsync();
+            var orderItems = await _unitOfwork.orderItems.GetAllAsync();
             return _mapper.Map<IEnumerable<OrderItemDTO>>(orderItems);
         }
 
         public async Task<OrderItemDTO> CreateOrderItemAsync(OrderItemCreateDTO orderItemCreate)
         {
             var orderItem = _mapper.Map<OrderItem>(orderItemCreate);
-            var createdItem = await _orderItemRepository.AddAsync(orderItem);
-            return _mapper.Map<OrderItemDTO>(createdItem);
+             await _unitOfwork.orderItems.AddAsync(orderItem);
+                   _unitOfwork.Complete();
+            return _mapper.Map<OrderItemDTO>(orderItem);
         }
 
         public async Task UpdateOrderItemAsync(int id, OrderItemUpdateDTO orderItemUpdate)
@@ -54,12 +58,13 @@ namespace E_CommerceDataBusiness.Services
             if (id <= 0)
                 throw new ArgumentException("ID must be positive");
 
-            var orderItem = await _orderItemRepository.GetByIdAsync(id);
+            var orderItem = await _unitOfwork.orderItems.GetByIdAsync(id);
             if (orderItem == null)
                 throw new KeyNotFoundException("Order item not found");
 
             _mapper.Map(orderItemUpdate, orderItem);
-            await _orderItemRepository.UpdateAsync(orderItem);
+            _unitOfwork.orderItems.Update(orderItem);
+            await _unitOfwork.CompleteAsync();
         }
 
         public async Task DeleteOrderItemAsync(int id)
@@ -67,10 +72,12 @@ namespace E_CommerceDataBusiness.Services
             if (id <= 0)
                 throw new ArgumentException("ID must be positive");
 
-            if (!await _orderItemRepository.ExistsAsync(id))
+            if (!await _unitOfwork.orderItems.ExistsAsync(id))
                 throw new KeyNotFoundException("Order item not found");
-
-            await _orderItemRepository.DeleteAsync(id);
+            var orderitem = await _unitOfwork.orderItems.GetByIdAsync(id);
+            
+            _unitOfwork.orderItems.Delete(orderitem);
+            await _unitOfwork.CompleteAsync();
         }
     }
 }
