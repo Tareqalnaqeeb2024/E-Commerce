@@ -46,10 +46,18 @@ builder.Services.AddDbContextFactory<AppDbContext>(options =>
     ServiceLifetime.Scoped);
 builder.Services.AddIdentity<UserAccount, IdentityRole>() // Specify your custom user class
     .AddEntityFrameworkStores<AppDbContext>()
+    .AddSignInManager<SignInManager<UserAccount>>() // Specify your custom user class   
     .AddDefaultTokenProviders();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWT"));
 builder.Services.AddCustomJwtAuth(builder.Configuration);
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5); // Short expiration for external auth
+    options.SlidingExpiration = true;
+});
+
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
@@ -93,7 +101,11 @@ builder.Services.AddSingleton<RabbitMQ.Client.IConnectionFactory>(sp =>
 
 //Auto Mapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+builder.Services.AddSession();
 
 builder.Services.AddCors(options =>
 {
@@ -125,6 +137,7 @@ app.UseStaticFiles();
 app.UseMiddleware<RateLimitingMiddleware>();
 app.UseRouting(); // ÌÃ» √‰ ÌﬂÊ‰ √Ê·«
 app.UseCors("AllowAll"); // À„ CORS
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 // «·¬‰ Ì„ﬂ‰  ⁄ÌÌ‰ «· hubs Ê«· controllers

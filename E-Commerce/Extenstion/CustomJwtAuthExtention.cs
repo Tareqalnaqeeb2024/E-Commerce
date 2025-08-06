@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Claims;
@@ -16,6 +18,8 @@ namespace E_Commerce.Extenstion
                     o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                     o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+
 
                 }).AddJwtBearer(o =>
                 {
@@ -45,8 +49,20 @@ namespace E_Commerce.Extenstion
                             return Task.CompletedTask;
                         }
                     };
-                });
-            }
+                })
+            .AddGoogle(options =>
+             {
+                 options.ClientId = configuration["Authentication:Google:ClientId"];
+                 options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+                 options.SignInScheme = IdentityConstants.ExternalScheme;
+
+                 // Optional: Map specific claims from Google
+                 options.ClaimActions.MapJsonKey(ClaimTypes.Email, "email");
+                 options.ClaimActions.MapJsonKey(ClaimTypes.GivenName, "given_name");
+                 options.ClaimActions.MapJsonKey(ClaimTypes.Surname, "family_name");
+             });
+
+        }
         public static void AddSwaggerGenJWTAuth(this IServiceCollection services)
         {
             services.AddSwaggerGen(o =>

@@ -170,5 +170,34 @@ namespace E_CommerceDataBusiness.Services
             
             return true;
         }
+        public async Task<TokenDTO> HandleGoogleUserAsync(string email, string firstName, string lastName)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+               user  = new UserAccount
+                {
+                    UserName = firstName + ""+lastName,
+                    Email = email,
+                    EmailConfirmed = true,
+                 
+                };
+
+                var result = await _userManager.CreateAsync(user);
+                if (!result.Succeeded)
+                    throw new Exception("User creation failed");
+
+                await _userManager.AddToRoleAsync(user, "User");
+            }
+
+            return new TokenDTO
+            {
+                Email = user.Email,
+                Token = await _tokenService.GenerateTokenAsync(user),
+                UserID = user.Id,
+                Role = (await _userManager.GetRolesAsync(user)).ToList()
+            };
+        }
     }
 }

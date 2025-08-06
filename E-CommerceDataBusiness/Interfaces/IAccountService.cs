@@ -14,5 +14,6 @@ namespace E_CommerceDataBusiness.Interfaces
         Task<string> ForgotPasswordAsync (ForgetPasswordDto forgetPasswordDto);
         Task<bool> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
         Task<bool> VerifyOTPAsync(VerfiyCodeDto verfiyCodeDto);
+        Task<TokenDTO> HandleGoogleUserAsync(string email, string firstName, string lastName);
     }
 }

@@ -1,9 +1,14 @@
 ﻿using E_Commerce.Basic;
 using E_CommerceDataAccess.DTO;
+using E_CommerceDataAccess.Models;
 using E_CommerceDataBusiness.Interfaces;
+using E_CommerceDataBusiness.Services.ExternalServices;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace E_Commerce.Controllers
 {
@@ -81,6 +86,38 @@ namespace E_Commerce.Controllers
 
             var result = await _accountService.VerifyOTPAsync(verify);
             return result ? Ok(result) : BadRequest(result);
+        }
+        [HttpGet("google-login")]
+        public IActionResult GoogleLogin()
+        {
+            var properties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+            };
+            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+        }
+
+        [HttpGet("google-response")]
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            if (!result.Succeeded)
+                return BadRequest("Google authentication failed");
+
+            var claims = result.Principal.Identities
+                .FirstOrDefault()?.Claims;
+
+            var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var name = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            var givenName = claims?.FirstOrDefault(c => c.Type == ClaimTypes.GivenName)?.Value;
+            var surname = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Surname)?.Value;
+
+            if (string.IsNullOrEmpty(email))
+                return BadRequest("Email claim not received from Google");
+
+            var token = _accountService.HandleGoogleUserAsync(email, givenName, surname);
+
+            return Ok(token);
         }
 
 
