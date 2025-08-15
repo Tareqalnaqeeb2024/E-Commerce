@@ -170,7 +170,7 @@
 
 
 # Clone the repository
-git clone https://github.com/YourUserName/E-Commerce.git
+git clone https://github.com/Tareqalnaqeeb2024/E-Commerce
 
 # Update appsettings.json with your local configurations (SQL Server, Redis, RabbitMQ, Google OAuth)
 
