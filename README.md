@@ -100,3 +100,84 @@
     "EnableSSL": true
   }
 }
+```
+## 📡 API Documentation
+🔐 Authentication & Account
+| Method   | Endpoint                       | Description                                   |
+| -------- | ------------------------------ | --------------------------------------------- |
+| **POST** | `/api/Account/register`        | Register a new user.                          |
+| **POST** | `/api/Account/login`           | Login and receive a JWT token.                |
+| **POST** | `/api/Account/forgot-password` | Request a password reset (send OTP to email). |
+| **POST** | `/api/Account/reset-password`  | Reset password using OTP.                     |
+| **POST** | `/api/Account/verify-otp`      | Verify OTP code.                              |
+| **GET**  | `/api/Account/google-login`    | Login using Google OAuth.                     |
+
+
+🗂 Categories
+| Method     | Endpoint               | Description            |
+| ---------- | ---------------------- | ---------------------- |
+| **GET**    | `/api/Categories`      | Get all categories.    |
+| **GET**    | `/api/Categories/{id}` | Get category by ID.    |
+| **POST**   | `/api/Categories`      | Create a new category. |
+| **PUT**    | `/api/Categories/{id}` | Update a category.     |
+| **DELETE** | `/api/Categories/{id}` | Delete a category.     |
+
+🗂 Categories
+| Method     | Endpoint                           | Description                 |
+| ---------- | ---------------------------------- | --------------------------- |
+| **GET**    | `/api/Products`                    | Get all products.           |
+| **GET**    | `/api/Products/{id}`               | Get product by ID.          |
+| **POST**   | `/api/Products`                    | Create a new product.       |
+| **PUT**    | `/api/Products/{id}`               | Update a product.           |
+| **DELETE** | `/api/Products/{id}`               | Delete a product.           |
+| **GET**    | `/api/Products/category/{name}`    | Get products by category.   |
+| **GET**    | `/api/Products/search?keyword=...` | Search products by keyword. |
+| **GET**    | `/api/Products/paged`              | Get paginated products.     |
+
+🛒 Cart
+| Method     | Endpoint                          | Description               |
+| ---------- | --------------------------------- | ------------------------- |
+| **GET**    | `/api/Cart`                       | Get cart content.         |
+| **POST**   | `/api/Cart`                       | Add product to cart.      |
+| **DELETE** | `/api/Cart/{productId}`           | Remove product from cart. |
+| **PUT**    | `/api/Cart/increment/{productId}` | Increase item quantity.   |
+| **PUT**    | `/api/Cart/decrement/{productId}` | Decrease item quantity.   |
+
+❤️ Favorites
+| Method     | Endpoint                     | Description                    |
+| ---------- | ---------------------------- | ------------------------------ |
+| **POST**   | `/api/Favorites/{productId}` | Add product to favorites.      |
+| **DELETE** | `/api/Favorites/{productId}` | Remove product from favorites. |
+| **GET**    | `/api/Favorites`             | Get user's favorites.          |
+
+📦 Orders
+| Method     | Endpoint                  | Description                |
+| ---------- | ------------------------- | -------------------------- |
+| **GET**    | `/api/Orders`             | Get all orders (Admin).    |
+| **GET**    | `/api/Orders/user`        | Get current user's orders. |
+| **GET**    | `/api/Orders/{id}`        | Get order by ID.           |
+| **POST**   | `/api/Orders`             | Create a new order.        |
+| **PUT**    | `/api/Orders/{id}`        | Update an order.           |
+| **DELETE** | `/api/Orders/{id}`        | Delete an order.           |
+| **PUT**    | `/api/Orders/cancel/{id}` | Cancel an order.           |
+| **GET**    | `/api/Orders/paged`       | Get paginated orders.      |
+
+📡 SignalR Hubs
+| Hub                 | Endpoint           | Description                                            |
+| ------------------- | ------------------ | ------------------------------------------------------ |
+| **NotificationHub** | `/notificationHub` | Send live notifications to users (e.g., order status). |
+| **ProductHub**      | `/productHub`      | Real-time updates for product changes.                 |
+
+
+# Clone the repository
+git clone https://github.com/YourUserName/E-Commerce.git
+
+# Update appsettings.json with your local configurations (SQL Server, Redis, RabbitMQ, Google OAuth)
+
+# Run database migrations
+dotnet ef database update
+
+# Start the project
+dotnet run
+
+
