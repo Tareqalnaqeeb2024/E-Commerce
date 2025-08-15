@@ -10,10 +10,6 @@ namespace E_CommerceDataAccess.Interfaces
 {
     public interface ICategoryRepository :IBaseRepository<Category>
     {
-        //Task<IEnumerable<Category>> GetAllAsync();
-        //Task<Category> GetByIdAsync(int id);
-        //Task<Category> AddAsync(Category category);
-        //Task UpdateAsync(Category category);
-        //Task DeleteAsync(int id);
+        
     }
 }

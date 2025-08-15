@@ -15,13 +15,10 @@ namespace E_CommerceDataAccess.Interfaces
     {
         Task<UserAccount> GetByIdAsync(string id);
         Task<UserAccount> GetByUsernameAsync(string username);
-        //Task<IEnumerable<UserAccount>> GetAllAsync();
         Task<bool> CreateAsync(UserAccount user, string password, string role);
         Task<bool> UpdateAsync(UserAccount user);
         Task<bool> DeleteAsync(string id);
         Task<bool> ExistsAsync(string username);
-
-        // Extended functionality
         Task<IEnumerable<string>> GetUserRolesAsync(string userId);
         Task<bool> UpdateUserRolesAsync(string userId, IEnumerable<string> roles);
 

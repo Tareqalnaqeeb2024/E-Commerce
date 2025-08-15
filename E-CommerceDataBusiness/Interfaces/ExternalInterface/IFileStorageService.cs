@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataBusiness.Interfaces.ExternalInterface
 {
-    // E_CommerceDataBusiness/Interfaces/IFileStorageService.cs
     public interface IFileStorageService
     {
         Task<string> SaveFileAsync(IFormFile file, string subDirectory = "images");

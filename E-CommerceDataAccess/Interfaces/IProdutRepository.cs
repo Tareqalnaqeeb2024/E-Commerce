@@ -14,17 +14,11 @@ namespace E_CommerceDataAccess.Interfaces
     public interface IProductRepository : IBaseRepository<Product>
     {
         Task<IEnumerable<Product>> GetAllWithCategoryAsync();
-        //Task<Product> GetByIdAsync(int id);
         Task<Product> GetByIdWithCategoryAsync(int id);
-        //Task<Product> AddAsync(Product product);
-        //Task UpdateAsync(Product product);
-        //Task DeleteAsync(int id);
         Task<bool> AnyByCategoryIdAsync(int categoryId);
         Task<IEnumerable<Product>> GetAllWithCategoryNameAsync(string categoryname);
-
         Task<IEnumerable<Product>> SearchByNameOrDescriptionAsync(string keyword);
         Task<IEnumerable<Product>> GetAvailableProductsAsync();
-
         Task<PagedResult<Product>> GetPagedProductsAsync(ProductPagination parameters);
     }
 }

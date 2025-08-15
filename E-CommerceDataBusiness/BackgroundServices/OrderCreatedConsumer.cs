@@ -73,10 +73,8 @@ namespace E_CommerceDataBusiness.BackgroundServices
                                 var user = await dbContext.Users.FindAsync(existingOrder.UserId);
                                 await _emailService.SendEmailAsync(user.Email, " // Created New Order //", $"Hello {user.UserName} Your Order with Id {existingOrder.OrderId} has  Complated Staust");
 
-                                //var message = $"OrderId: {order.OrderId} from user {user.UserName}";
-                                //await hub.Clients.All.SendAsync("ReceiveNewOrder", message);
+                               
                                 
-                                //_logger.LogInformation($"Processed Order: {order.OrderId}");
                             }
                         }
 
@@ -85,7 +83,7 @@ namespace E_CommerceDataBusiness.BackgroundServices
                     }
                     catch (Exception ex)
                     {
-                        //_logger.LogError(ex, "Error processing order");
+                       
                         // Requeue the message if processing fails
                         channel.BasicNack(ea.DeliveryTag, false, true);
                     }

@@ -115,7 +115,7 @@ namespace E_Commerce.Controllers
             if (string.IsNullOrEmpty(email))
                 return BadRequest("Email claim not received from Google");
 
-            var token = _accountService.HandleGoogleUserAsync(email, givenName, surname);
+            var token = await _accountService.HandleGoogleUserAsync(email, givenName, surname);
 
             return Ok(token);
         }

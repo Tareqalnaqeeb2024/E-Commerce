@@ -12,17 +12,17 @@ namespace E_CommerceDataBusiness.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly AppDbContext _context;
+        
         private readonly ITokenService _tokenService;
         private readonly IRedisService _redisService;
         private readonly IEmailService _emailService;
         private readonly UserManager<UserAccount> _userManager;
         private readonly IMapper _mapper;
 
-        public AccountService(AppDbContext context, UserManager<UserAccount> userManager , ITokenService tokenService, IRedisService redisService,
+        public AccountService( UserManager<UserAccount> userManager , ITokenService tokenService, IRedisService redisService,
             IEmailService emailService , IMapper mapper)
         {
-            _context = context;
+           
             _userManager = userManager;
             _tokenService = tokenService;
             _redisService = redisService;

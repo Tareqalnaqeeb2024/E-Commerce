@@ -26,12 +26,7 @@ namespace E_CommerceDataBusiness.Services
 
         public async Task AddToFavorite(string userId, int productId)
         {
-            //var product = _productService.GetProductByIdAsync(productId);
-            //if (product == null)
-            //{
-            //    throw new KeyNotFoundException("المنتج غير موجود");
-            //}
-
+           
             await _favoriteRepository.AddToFavorite(userId, productId);
         }
 

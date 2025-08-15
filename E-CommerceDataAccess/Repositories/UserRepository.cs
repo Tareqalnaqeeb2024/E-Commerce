@@ -18,7 +18,6 @@ namespace E_CommerceDataAccess.Repositories
     {
         private readonly UserManager<UserAccount> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        //private readonly AppDbContext _context;
 
         public UserRepository(
             UserManager<UserAccount> userManager,
@@ -27,7 +26,6 @@ namespace E_CommerceDataAccess.Repositories
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            //_context = context;
         }
 
         public async Task<UserAccount> GetByIdAsync(string id)
@@ -40,10 +38,7 @@ namespace E_CommerceDataAccess.Repositories
             return await _userManager.FindByNameAsync(username);
         }
 
-        //public async Task<IEnumerable<UserAccount>> GetAllAsync()
-        //{
-        //    return await _userManager.Users.ToListAsync();
-        //}
+      
 
         public async Task<bool> CreateAsync(UserAccount user, string password, string role)
         {
