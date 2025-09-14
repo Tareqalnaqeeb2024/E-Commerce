@@ -16,7 +16,8 @@ namespace E_CommerceDataAccess.Models
         [Column(TypeName = "decimal(10, 2)")]
         public decimal TotalAmount { get; set; }
         public string Status { get; set; } = "pending";
-
+        [NotMapped] // This property is computed and shouldn't be mapped to database
+        public string UserName => User?.UserName;
         public ICollection<OrderItem> OrderItems { get; set; }
 
         [ForeignKey(nameof(UserId))]

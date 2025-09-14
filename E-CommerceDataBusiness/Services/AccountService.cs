@@ -2,8 +2,10 @@
 using E_CommerceDataAccess.Data;
 using E_CommerceDataAccess.DTO;
 using E_CommerceDataAccess.Models;
+using E_CommerceDataBusiness.BackgroundServices;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
+using E_CommerceDataBusiness.Services.ExternalServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -18,9 +20,10 @@ namespace E_CommerceDataBusiness.Services
         private readonly IEmailService _emailService;
         private readonly UserManager<UserAccount> _userManager;
         private readonly IMapper _mapper;
+        private readonly IRabbitMQService _rabbitMQService;
 
         public AccountService( UserManager<UserAccount> userManager , ITokenService tokenService, IRedisService redisService,
-            IEmailService emailService , IMapper mapper)
+            IEmailService emailService , IMapper mapper , IRabbitMQService rabbitMQService)
         {
            
             _userManager = userManager;
@@ -28,6 +31,7 @@ namespace E_CommerceDataBusiness.Services
             _redisService = redisService;
             _emailService = emailService;
             _mapper = mapper;
+            _rabbitMQService = rabbitMQService;
         }
         public  async Task<string> ForgotPasswordAsync(ForgetPasswordDto forgetPasswordDto)
         {
@@ -92,6 +96,7 @@ namespace E_CommerceDataBusiness.Services
                 PhoneNumber = registerDTO.Phone,
                
             };
+           
 
 
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -103,11 +108,14 @@ namespace E_CommerceDataBusiness.Services
                 throw new Exception("User creation failed");
             else
             {
-                await _emailService.SendEmailAsync(
-                    user.Email,
-                    "مرحبًا بك في تطبيقنا!",
-                    $"مرحبًا {user.UserName} 👋\n\nنحن سعداء بانضمامك إلى منصتنا."
-                );
+                var welcomeMessage = new WelcomeEmailMessage
+                {
+                    Email = user.Email,
+                    UserName = user.UserName
+                };
+
+                _rabbitMQService.PublishMessage(welcomeMessage, "welcome-email-queue");
+
             }
 
             return new TokenDTO

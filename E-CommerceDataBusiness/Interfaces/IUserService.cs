@@ -16,7 +16,7 @@ namespace E_CommerceDataBusiness.Interfaces
             Task<UserDTO> GetUserByIdAsync(string id);
             Task<UserDTO> GetUserByUsernameAsync(string username);
             Task<IEnumerable<UserDTO>> GetAllUsersAsync();
-            Task<bool> CreateUserAsync(UserDTO user, string Role);
+            Task<bool> CreateUserAsync(CreateNewUserDTO user, string Role);
             Task<bool> UpdateUserAsync(UserDTO user);
             Task<bool> DeleteUserAsync(string id);
             Task<bool> UserExistsAsync(string username);

@@ -14,6 +14,8 @@ namespace E_CommerceDataAccess.Models
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+        public string Description { get; set; }
+        public int ProductCount { get; set; } = 0;
 
         public ICollection<Product> Products { get; set; }
     }

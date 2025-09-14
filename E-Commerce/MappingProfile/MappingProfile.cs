@@ -27,6 +27,28 @@ namespace E_Commerce.MappingProfile
                   .ForMember(dest => dest.userId, opt => opt.MapFrom(src => src.Id))
                   .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.PhoneNumber))
                   .ForMember(dest => dest.Roles, opt => opt.Ignore());
+            CreateMap<UserDTO, UserAccount>()
+    .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.userId))
+    .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
+    .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
+    .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+    .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()) // مهم: تجاهل PasswordHash
+    .ForMember(dest => dest.SecurityStamp, opt => opt.Ignore())
+    .ForMember(dest => dest.ConcurrencyStamp, opt => opt.Ignore())
+    .ForMember(dest => dest.Orders, opt => opt.Ignore())
+    .ForMember(dest => dest.Favorites, opt => opt.Ignore());
+            CreateMap<CreateNewUserDTO, UserAccount>()
+   
+   .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.Phone))
+   .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
+   .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
+   
+   .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()) // مهم: تجاهل PasswordHash
+   .ForMember(dest => dest.SecurityStamp, opt => opt.Ignore())
+   .ForMember(dest => dest.ConcurrencyStamp, opt => opt.Ignore())
+   .ForMember(dest => dest.Orders, opt => opt.Ignore())
+   .ForMember(dest => dest.Favorites, opt => opt.Ignore());
+
 
 
             CreateMap<Order, OrderDTO>();

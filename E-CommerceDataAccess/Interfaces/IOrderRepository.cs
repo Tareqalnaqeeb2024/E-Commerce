@@ -16,5 +16,7 @@ namespace E_CommerceDataAccess.Interfaces
         Task<Order> GetByIdWithDetailsAsync(int id);
         Task<IEnumerable<Order>> GetByUserIdWithDetailsAsync(string userId);
         Task<PagedResult<Order>> GetPagedOrdersAsync(OrderPagination parameters, string? userId = null);
+        Task<IEnumerable<Order>> SearchByStatusOrIdAsync(string keyword );
+
     }
 }

@@ -35,6 +35,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddValidatorsFromAssembly(typeof(ForgetPasswordDtoValidator).Assembly);
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -88,6 +90,7 @@ builder.Services.AddSingleton<IEmailService, EmailService>();
 
 builder.Services.AddSingleton<IRabbitMQService, RabbitMQService>();
 builder.Services.AddHostedService<OrderCreatedConsumer>();
+builder.Services.AddHostedService<WelcomeEmailConsumer>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IConnectionMultiplexer>(_ =>
     ConnectionMultiplexer.Connect("localhost:6379"));
@@ -111,7 +114,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5502" , "http://127.0.0.1:5500" , "http://127.0.0.1:5501") // Or .WithOrigins("http://127.0.0.1:5500/")
+        policy.WithOrigins("https://localhost:7284", "http://127.0.0.1:5502" , 
+            "http://127.0.0.1:5500" , "http://127.0.0.1:5501") // Or .WithOrigins("http://127.0.0.1:5500/")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();

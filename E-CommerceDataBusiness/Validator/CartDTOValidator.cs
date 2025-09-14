@@ -47,7 +47,7 @@ namespace E_CommerceDataBusiness.Validator
     {
         public OrderDTOValidator()
         {
-            RuleFor(x => x.UserId).NotEmpty();
+            RuleFor(x => x.UserName).NotEmpty();
             RuleFor(x => x.TotalAmount).GreaterThanOrEqualTo(0);
             RuleForEach(x => x.OrderItems).SetValidator(new OrderItemDTOValidator());
         }
@@ -58,7 +58,7 @@ namespace E_CommerceDataBusiness.Validator
         public OrderCreateDTOValidator()
         {
             RuleFor(x => x.UserId).NotEmpty();
-            RuleFor(x => x.OrderItems).NotEmpty();
+            RuleFor(x => x.OrderItems).Must(x => x.Count > 0).WithMessage("must ordersitem be more that 0");
             RuleForEach(x => x.OrderItems).SetValidator(new OrderItemCreateDTOValidator());
         }
     }

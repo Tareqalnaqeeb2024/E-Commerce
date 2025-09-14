@@ -18,7 +18,7 @@ namespace E_CommerceDataBusiness.Interfaces
         Task UpdateOrderAsync(int id, OrderUpdateDTO updateDTO);
         Task DeleteOrderAsync(int id);
         Task CancelOrderAsync(int id, string userId, bool isAdmin);
-
+        Task <IEnumerable<OrderDTO>> SearchStatusKeyOrId(string key);
         Task<PagedResult<OrderDTO>> GetOrdersPagedAsync(OrderPagination parameters, string? userId = null);
     }
 }

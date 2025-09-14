@@ -117,7 +117,7 @@ public class ProductController : ControllerBase
             }
 
             var result = await _productService.GetProductsPagedAsync(parameters);
-            return Ok(result);
+                return Ok(result);
         }
         catch (Exception ex)
         {

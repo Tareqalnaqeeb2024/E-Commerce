@@ -11,7 +11,7 @@ namespace E_CommerceDataAccess.UnitOfWork
 {
     public interface IUnitOfwork : IDisposable
     {
-        IBaseRepository<Category> categories { get; }
+        ICategoryRepository categories { get; }
         IProductRepository    products { get; }
         IOrderItemRepository orderItems { get; }
         IOrderRepository orders { get; }

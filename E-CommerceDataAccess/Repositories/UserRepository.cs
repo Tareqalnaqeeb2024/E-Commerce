@@ -121,7 +121,7 @@ namespace E_CommerceDataAccess.Repositories
                 RecentOrders = recentOrders.Select(o => new OrderDTO
                 {
                     OrderId = o.OrderId,
-                    UserId = o.UserId,
+                 
                     OrderDate = o.OrderDate,
                     TotalAmount = o.TotalAmount,
                     Status = o.Status

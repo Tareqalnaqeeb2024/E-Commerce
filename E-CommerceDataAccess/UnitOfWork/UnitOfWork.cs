@@ -16,7 +16,8 @@ namespace E_CommerceDataAccess.UnitOfWork
     public class UnitOfWork : IUnitOfwork
     {
         private readonly AppDbContext _context;
-        public IBaseRepository<Category> categories { get; private set; }
+
+        public ICategoryRepository categories { get; private set; }
 
         public IProductRepository products {  get; private set; }
 
@@ -34,7 +35,7 @@ namespace E_CommerceDataAccess.UnitOfWork
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
-            categories = new BaseRepository<Category>(_context);
+            categories = new CategoryRepository(_context);
             products = new ProductRepository(_context);
             orderItems = new OrderItemRepository(_context);
             orders = new OrderRepository(_context);
@@ -45,7 +46,7 @@ namespace E_CommerceDataAccess.UnitOfWork
         {
             return _context.SaveChanges();
         }
-
+            
         public void Dispose()
         {
             _context.Dispose();

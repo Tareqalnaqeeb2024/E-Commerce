@@ -104,5 +104,12 @@ namespace E_CommerceDataAccess.Repositories
                 PageSize = parameters.PageSize
             };
         }
+
+        public async Task<IEnumerable<Order>> SearchByStatusOrIdAsync(string keyword )
+        {
+            return await _context.Orders
+                 .Where(o =>  o.Status.Contains(keyword) )
+                 .ToListAsync();
+        }
     }
 }

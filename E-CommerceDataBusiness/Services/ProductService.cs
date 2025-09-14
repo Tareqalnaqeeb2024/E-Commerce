@@ -34,7 +34,7 @@ public class ProductService :IProductService
 
     public async Task<IEnumerable<ProductDTO>> GetAllProductsAsync()
     {
-         string cacheKey = $"{KeyPrefix}all";
+        string cacheKey = $"{KeyPrefix}all";
 
         var cachedProducts = await _redisCache.GetAsync<IEnumerable<ProductDTO>>(cacheKey);
         if (cachedProducts != null)
@@ -74,6 +74,7 @@ public class ProductService :IProductService
         try
         {
             var (fileStream, _) = await _fileStorageService.GetFileAsync(product.ImageUrl);
+            using(fileStream)
             using (var memoryStream = new MemoryStream())
             {
                 await fileStream.CopyToAsync(memoryStream);
@@ -95,7 +96,6 @@ public class ProductService :IProductService
         var product = _mapper.Map<Product>(createDTO);
         product.ImageUrl = await _fileStorageService.SaveFileAsync(createDTO.ImageFile);
 
-        //var createdProduct = await _productRepository.AddAsync(product);
         await _unitOfwork.products.AddAsync(product);
          _unitOfwork.Complete();
 
@@ -138,9 +138,9 @@ public class ProductService :IProductService
         await _fileStorageService.DeleteFileAsync(product.ImageUrl);
         _unitOfwork.products.Delete(product);
         await _unitOfwork.CompleteAsync();
-         await _redisCache.RemoveAsync($"{KeyPrefix}{id}");
-    await _redisCache.RemoveAsync($"{KeyPrefix}all");
-    await _redisCache.RemoveAsync($"{KeyPrefix}paged:*");
+        await _redisCache.RemoveAsync($"{KeyPrefix}{id}");
+        await _redisCache.RemoveAsync($"{KeyPrefix}all");
+        await _redisCache.RemoveAsync($"{KeyPrefix}paged:*");
     }
 
     public async Task<(Stream FileStream, string ContentType)> DownloadImageAsync(string fileName)

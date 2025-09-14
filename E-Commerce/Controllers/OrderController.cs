@@ -118,6 +118,13 @@ public class OrderController : ControllerBase
 
 
     }
+
+    [HttpGet("SearchBy{key}")]
+    public async Task<ActionResult<IEnumerable<OrderDTO>>> SearchByStatusOrId(string key)
+    {
+       var reslut =  await _orderService.SearchStatusKeyOrId(key);
+        return Ok(reslut);
+    }
     [Authorize(Roles = "Admin")]
     [HttpGet("paged")]
     public async Task<ActionResult<PagedResult<OrderDTO>>> GetOrdersPaged(
@@ -146,4 +153,5 @@ public class OrderController : ControllerBase
         var result = await _orderService.GetOrdersPagedAsync(parameters, userId);
         return Ok(result);
     }
+
 }

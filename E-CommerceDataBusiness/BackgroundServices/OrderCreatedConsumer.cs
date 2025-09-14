@@ -59,9 +59,9 @@ namespace E_CommerceDataBusiness.BackgroundServices
                         using (var scope = _serviceProvider.CreateScope())
                         {
                             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                            var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
-                            var hub = scope.ServiceProvider.GetRequiredService<IHubContext<NotificationHub>>();
-                            var hubStock = scope.ServiceProvider.GetRequiredService<IHubContext<ProductHub>>();
+                            //var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
+                            //var hub = scope.ServiceProvider.GetRequiredService<IHubContext<NotificationHub>>();
+                            //var hubStock = scope.ServiceProvider.GetRequiredService<IHubContext<ProductHub>>();
 
 
                             var existingOrder = await dbContext.Orders.FindAsync(order.OrderId);

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace E_CommerceDataAccess.Repositories
 {
-    public class ProductRepository :BaseRepository<Product> , IProductRepository
+    public class ProductRepository :BaseRepository<Product>, IProductRepository
     {
 
         public ProductRepository(AppDbContext context) :base (context) 

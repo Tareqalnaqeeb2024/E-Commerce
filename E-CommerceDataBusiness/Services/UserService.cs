@@ -5,8 +5,10 @@ using E_CommerceDataAccess.DTO.Pagination;
 using E_CommerceDataAccess.Interfaces;
 using E_CommerceDataAccess.Models;
 using E_CommerceDataAccess.UnitOfWork;
+using E_CommerceDataBusiness.BackgroundServices;
 using E_CommerceDataBusiness.Interfaces;
 using E_CommerceDataBusiness.Interfaces.ExternalInterface;
+using E_CommerceDataBusiness.Services.ExternalServices;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -24,17 +26,20 @@ namespace E_Commerce.Business.Services
         private const string UserCachePrefix = "user:";
         private const string AllUsersCacheKey = "users:all";
         private const string DashboardCacheKey = "dashboard:stats";
+        private readonly IRabbitMQService _rabbitMQService;
 
         public UserService(
             IUnitOfwork unitOfwork,
             IEmailService emailService,
             IRedisService redisCache,
-            IMapper mapper)
+            IMapper mapper,
+            IRabbitMQService rabbitMQService)
         {
             _unitOfwork = unitOfwork;
             _emailService = emailService;
             _redisCache = redisCache;
             _mapper = mapper;
+            _rabbitMQService = rabbitMQService;
         }
 
         public async Task<UserDTO> GetUserByIdAsync(string id)
@@ -91,22 +96,30 @@ namespace E_Commerce.Business.Services
             return userDtos;
         }
 
-        public async Task<bool> CreateUserAsync(UserDTO userDto, string role)
+        public async Task<bool> CreateUserAsync(CreateNewUserDTO newuserDto, string role)
         {
-            if (await _unitOfwork.users.ExistsAsync(userDto.UserName))
+            if (await _unitOfwork.users.ExistsAsync(newuserDto.UserName))
                 return false;
 
-            var userAccount = _mapper.Map<UserAccount>(userDto);
-            var created = await _unitOfwork.users.CreateAsync(userAccount, userDto.Password, role);
+            var userAccount = _mapper.Map<UserAccount>(newuserDto);
+            var created = await _unitOfwork.users.CreateAsync(userAccount, newuserDto.Password, role);
 
             if (created)
             {
-                await _emailService.SendEmailAsync(
-                    userDto.Email,
-                    "Welcome to Our Platform",
-                    $"Hello {userDto.UserName},\n\nYour account has been successfully created!");
+                var welcomeMessage = new WelcomeEmailMessage
+                {
+                    Email = newuserDto.Email,
+                    UserName = newuserDto.UserName
+                };
 
-                // Clear cache
+                _rabbitMQService.PublishMessage(welcomeMessage, "welcome-email-queue");
+
+                await _emailService.SendEmailAsync(
+                    newuserDto.Email,
+                    "Welcome to Our Platform",
+                    $"Hello {newuserDto.UserName},\n\nYour account has been successfully created!");
+
+                //Clear cache
                 await _redisCache.RemoveAsync(AllUsersCacheKey);
             }
 
@@ -129,7 +142,7 @@ namespace E_Commerce.Business.Services
 
             if (updated)
             {
-                // Clear relevant caches
+                //Clear relevant caches
                 await _redisCache.RemoveAsync($"{UserCachePrefix}{userDto.userId}");
                 await _redisCache.RemoveAsync(AllUsersCacheKey);
             }

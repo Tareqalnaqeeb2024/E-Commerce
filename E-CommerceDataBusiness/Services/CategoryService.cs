@@ -39,7 +39,7 @@ namespace E_CommerceDataBusiness.Services
             {
                 return cachedCategories;
             }
-            var categoriesDto = await _unitOfwork.categories.GetAllAsync();
+            var categoriesDto = await _unitOfwork.categories.GetAllCategories();
 
             await _redisCache.SetAsync(cacheKey, categoriesDto, TimeSpan.FromMinutes(30));
 
@@ -56,7 +56,7 @@ namespace E_CommerceDataBusiness.Services
             {
                 return cachedCategory;
             }
-            
+
             var categoryDto = await _unitOfwork.categories.GetByIdAsync(id);
 
             if (categoryDto == null) throw new KeyNotFoundException("Category not found");

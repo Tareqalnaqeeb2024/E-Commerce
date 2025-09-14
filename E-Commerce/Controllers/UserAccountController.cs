@@ -43,14 +43,14 @@ namespace E_Commerce.Controllers
             return Ok(user);
         }
         [HttpPost]
-        public async Task<ActionResult<UserDTO>> CreateUser([FromBody] UserDTO userDTO)
+        public async Task<ActionResult<UserDTO>> CreateUser([FromBody] CreateNewUserDTO newuserDTO)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var created = await _userService.CreateUserAsync(userDTO,"User");
+            var created = await _userService.CreateUserAsync(newuserDTO,newuserDTO.Roles);
             if (!created) return BadRequest("User creation failed");
 
-            var newUser = await _userService.GetUserByUsernameAsync(userDTO.UserName);
+            var newUser = await _userService.GetUserByUsernameAsync(newuserDTO.UserName);
             return CreatedAtAction(nameof(GetUser), new { id = newUser.userId }, newUser);
         }
 

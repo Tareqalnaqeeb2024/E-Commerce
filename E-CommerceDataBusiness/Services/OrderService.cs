@@ -51,7 +51,7 @@ namespace E_CommerceDataBusiness.Services
             string cachkey = $"{KeyPrefix}all";
             var cachorder = await _redisCache.GetAsync<List<OrderDTO>>(cachkey);
 
-            if(cachorder != null)
+            if (cachorder != null)
             {
                 return cachorder;
             }
@@ -150,13 +150,13 @@ namespace E_CommerceDataBusiness.Services
         
         public async Task<PagedResult<OrderDTO>> GetOrdersPagedAsync(OrderPagination parameters, string? userId = null)
         {
-            string cacheKey = $"{KeyPrefix}paged:{userId}:{JsonConvert.SerializeObject(parameters)}";
-            var cachedResult = await _redisCache.GetAsync<PagedResult<OrderDTO>>(cacheKey);
+            //string cacheKey = $"{KeyPrefix}paged:{userId}:{JsonConvert.SerializeObject(parameters)}";
+            //var cachedResult = await _redisCache.GetAsync<PagedResult<OrderDTO>>(cacheKey);
 
-            if (cachedResult != null)
-            {
-                return cachedResult;
-            }
+            //if (cachedResult != null)
+            //{
+            //    return cachedResult;
+            //}
 
             var pagedResult = await _unitOfwork.orders.GetPagedOrdersAsync(parameters, userId);
             var orderDtos = _mapper.Map<List<OrderDTO>>(pagedResult.Items);
@@ -169,9 +169,17 @@ namespace E_CommerceDataBusiness.Services
                 PageSize = pagedResult.PageSize
             };
 
-            await _redisCache.SetAsync(cacheKey, result, TimeSpan.FromMinutes(10));
+            //await _redisCache.SetAsync(cacheKey, result, TimeSpan.FromMinutes(10));
 
             return result;
+        }
+
+       
+
+        public async Task<IEnumerable<OrderDTO>> SearchStatusKeyOrId(string key)
+        {
+            var orderdto = await _unitOfwork.orders.SearchByStatusOrIdAsync(key);
+            return _mapper.Map<List<OrderDTO>>(orderdto);
         }
     }
 }
